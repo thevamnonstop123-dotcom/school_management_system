@@ -1,0 +1,219 @@
+/* 1. Global & Layout */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f7fe;
+    padding: 20px;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+    max-width: 900px; 
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* 2. Left Branding Side */
+.login-sidebar {
+    flex: 1;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-sidebar::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.login-sidebar h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.welcome-image img {
+    width: 100%;
+    max-width: 250px;
+}
+
+/* 3. Right Form Side */
+.login-form-section {
+    flex: 1.2;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form-section h2 {
+    font-size: 2rem; 
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #2d3748;
+}
+
+.login-form-section p {
+    color: #718096;
+    margin-bottom: 30px;
+}
+
+/* 4. Input & Icon Logic */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center; /* Centers items vertically */
+}
+
+.input-icon-wrapper i {
+    position: absolute;
+    color: #a0aec0;
+    font-size: 0.9rem;
+    z-index: 2; /* Ensures icon stays above the background */
+}
+
+.input-icon-wrapper i:first-child {
+    left: 15px;
+}
+
+#togglePassword {
+    right: 15px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#togglePassword:hover {
+    color: #6366f1;
+}
+
+.login-form-section .form-group input {
+    width: 100%;
+    padding: 12px 15px 12px 42px; /* Top, Right, Bottom, Left (more room for icon) */
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Right-side padding for password input specifically to avoid eye icon overlap */
+.input-icon-wrapper input[type="password"],
+.input-icon-wrapper input[type="text"] {
+    padding-right: 42px;
+}
+
+.login-form-section .form-group input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* 5. Options & Button */
+.form-options {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+}
+
+.form-options label {
+    display: flex;
+    align-items: center; 
+    gap: 8px;           
+    margin-bottom: 0; /* Reset label margin here */
+    color: #718096;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.form-options input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: #6366f1; /* Modern way to color checkboxes */
+}
+
+.form-options a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 16px; 
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: all 0.2s;
+    margin-bottom: 20px;
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+    filter: brightness(1.1);
+}
+
+/* 6. Footer */
+.auth-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #718096;
+}
+
+.auth-footer a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* 7. Responsiveness */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        max-width: 450px;
+    }
+
+    .login-sidebar {
+        display: none; 
+    }
+
+    .login-form-section {
+        padding: 40px 30px;
+    }
+}

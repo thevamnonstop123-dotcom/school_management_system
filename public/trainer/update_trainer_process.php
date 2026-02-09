@@ -1,5 +1,5 @@
 <?php
-session_start(); // Important: Don't forget this for the flash message!
+session_start(); // for the flash message!
 require_once '../../classes/Trainer.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_trainer'])) {

@@ -1,6 +1,6 @@
 .sidebar {
-    min-width: 260px;
-    max-width: 260px;
+    min-width: 220px;
+    max-width: 220px;
     height: 100vh;
     background-color: #2d2d6d;
     color: white;
@@ -38,7 +38,6 @@ nav { flex: 1; }
 .sidebar li.active {
     background-color: #4a4a9d;
     color: white;
-    border-left: 4px solid white;
 }
 
 /* Figma Profile Section */

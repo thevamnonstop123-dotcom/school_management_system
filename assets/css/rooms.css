@@ -1,0 +1,213 @@
+/* --- 1. Layout & Main Content --- */
+.main-content {
+    flex: 1;
+    background-color: #f8fafc;
+    padding: 40px;
+    min-width: 0;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+header p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.rooms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 2. Form & Search Box --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.form-group select, 
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-save {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    width: 50%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    padding: 12px 12px;
+    gap: 8px;
+}
+
+.btn-cancel {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: 12px 12px;
+    width: 50%;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-box {
+    position: relative;
+    margin-left: 10px;
+}
+
+.search-box input {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 12px 8px 35px;
+    width: 180px;
+    font-size: 0.85rem;
+}
+
+.search-box i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+/* --- 3. Professional Table UI --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th {
+    text-align: left;
+    color: #94a3b8; 
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+table td {
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+table tr:hover {
+    background-color: #f8fafc;
+}
+
+/* --- 4. Content Styles (Figma Alignment) --- */
+.room-name-cell {
+    white-space: nowrap; 
+    min-width: 120px;   
+}
+
+.room-name-cell strong {
+    color: #1e293b;      
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.id-cell {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.branch-cell {
+    color: #64748b;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.capacity-badge {
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* --- 5. Colors & Actions --- */
+.badge-green  { color: #10b981; }
+.badge-blue   { color: #3b82f6; }
+.badge-purple { color: #8b5cf6; }
+.badge-red    { color: #ef4444; }
+
+.actions-cell {
+    display: flex;       
+    gap: 15px;           
+    align-items: center;
+}
+
+.btn-icon-edit { color: #3b82f6; }
+.btn-icon-delete { color: #ef4444; }
+
+.list-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Toast Notification Styling --- */
+.toast-container {
+    position: fixed;
+    top: 0;
+    right: 30%;
+    z-index: 1000;
+}
+
+.toast {
+    background: #ffffff;
+    color: #1e293b;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid #2563eb;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.toast.success { border-left-color: #10b981; }
+.toast.error   { border-left-color: #ef4444; }
+.toast.info    { border-left-color: #3b82f6; }
+
+@keyframes slideIn {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

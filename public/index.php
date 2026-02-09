@@ -1,1 +1,0 @@
-<?php include "../public/trainer/trainer.php"; ?>
