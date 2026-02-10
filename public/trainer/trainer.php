@@ -1,8 +1,4 @@
 <?php 
-require_once '../../classes/Trainer.php'; 
-
-$trainerObj = new Trainer();
-
 $search = $_GET['search'] ?? '';
 
 $limit = 6; 
@@ -21,11 +17,9 @@ if(!empty($search)) {
 
 $totalPages = ceil($totalTrainers / $limit);
 
-include '../partials/header.php'; 
 ?>
 
 <div class="container">
-    <?php include '../partials/sidebar.php'; ?>
 
     <main class="main-content">
         <header>
@@ -40,9 +34,12 @@ include '../partials/header.php';
         </header>
 
         <section class="table-container">
-            <form action="trainer.php" method="GET" class="search-bar">
-                <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search...">
-            </form>
+            <form action="index.php" method="GET" class="search-bar">
+            <input type="hidden" name="view" value="trainers">
+            
+            <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search...">
+            <button type="submit" style="display:none;">Search</button>
+        </form>
             
             <?php if(isset($_SESSION['flash_message'])): ?>
                 <div class="<?php echo $_SESSION['flash_type'] === 'delete' ? 'delete-message' : 'create-message'; ?>">
@@ -97,15 +94,14 @@ include '../partials/header.php';
                                         <?php echo htmlspecialchars($row['status']); ?>
                                     </span>
                                 </td>
+
                                 <td class="actions">
                                     <i class="far fa-eye"></i> 
-                                    
-                                    <a href="edit_trainer.php?id=<?php echo $row['trainer_id']; ?>">
+                                    <a href="trainer/edit_trainer.php?id=<?= $row['trainer_id']; ?>" title="Edit">
                                         <i class="far fa-edit"></i> 
                                     </a>
-
-                                    <a href="delete_trainer.php?id=<?php echo $row['trainer_id']; ?>"
-                                    onclick="return confirm('Are you sure you want to delete this trainer?');">
+                                    <a href="trainer/delete_trainer.php?id=<?= $row['trainer_id']; ?>" 
+                                    onclick="return confirm('Delete?');">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </td>
@@ -118,19 +114,19 @@ include '../partials/header.php';
                     <?php endif; ?>
                 </tbody>
             </table>
-            <div class="pagination-controls">
-                <a href="?page=<?php echo max(1, $page - 1); ?>&search=<?php echo urlencode($search); ?>" class="page-btn">
+           <div class="pagination-controls">
+                <a href="index.php?view=trainers&page=<?php echo max(1, $page - 1); ?>&search=<?php echo urlencode($search); ?>" class="page-btn">
                     <i class="fas fa-chevron-left"></i>
                 </a>
 
                 <?php for($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" 
+                    <a href="index.php?view=trainers&page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" 
                     class="page-btn <?php echo ($page == $i) ? 'active' : ''; ?>">
                         <?php echo $i; ?>
                     </a>
                 <?php endfor; ?>
 
-                <a href="?page=<?php echo min($totalPages, $page + 1); ?>&search=<?php echo urlencode($search); ?>" class="page-btn">
+                <a href="index.php?view=trainers&page=<?php echo min($totalPages, $page + 1); ?>&search=<?php echo urlencode($search); ?>" class="page-btn">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </div>
@@ -145,7 +141,7 @@ include '../partials/header.php';
             <span class="close-btn">&times;</span>
         </div>
         
-        <form action="process_trainer.php" method="POST" enctype="multipart/form-data">
+        <form action="trainer/process_trainer.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Trainer Photo</label>
                 <input type="file" name="avatar" accept="image/*">
@@ -177,10 +173,8 @@ include '../partials/header.php';
 
             <div class="form-actions">
                 <button type="button" class="btn-cancel">Cancel</button>
-                <button type="submit" name="add_trainer" class="btn-save">Save Trainer</button>
+                <button type="submit" name="add_trainer" class="btn-save">Save Trainer</button>            
             </div>
         </form>
     </div>
 </div>
-
-<?php include '../partials/footer.php'; ?>

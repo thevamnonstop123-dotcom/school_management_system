@@ -1,25 +1,20 @@
 <?php
-require_once '../../classes/Branch.php';
+require_once __DIR__ . '/../../classes/Branch.php';
 
 $branchObj = new Branch();
 
-// Get the ID from the URL and fetch the branch data
 if (!isset($_GET['id'])) {
-    header("Location: branch_list.php");
+    header("Location: index.php?view=branches");
     exit();
 }
 
 $id = (int)$_GET['id'];
 $branch = $branchObj->getById($id);
 
-// If branch doesn't exist, go back
 if (!$branch) {
-    header("Location: branch_list.php");
+    header("Location: index.php?view=branches");
     exit();
 }
-
-include '../partials/header.php';
-include '../partials/sidebar.php'; 
 ?>
 
 <div class="main-content">
@@ -32,9 +27,9 @@ include '../partials/sidebar.php';
 
     <nav class="breadcrumb">
         <i class="fas fa-home"></i> 
-        <a href="../dashboard/index.php">Dashboard</a> 
+        <a href="index.php">Dashboard</a> 
         <i class="fas fa-chevron-right separator"></i> 
-        <a href="branch_list.php">Branches</a> 
+        <a href="index.php?view=branches">Branches</a> 
         <i class="fas fa-chevron-right separator"></i> 
         <span class="active">Edit Branch</span>
     </nav>
@@ -42,26 +37,27 @@ include '../partials/sidebar.php';
     <div class="form-container card">
         <div class="form-header">
             <div class="icon-circle">
-                <i class="fas fa-code-branch"></i> </div>
+                <i class="fas fa-code-branch"></i> 
+            </div>
             <div class="form-title-text">
                 <h3>Branch Information</h3>
                 <p>Fill in the details for the branch</p>
             </div>
         </div>
 
-        <form action="process_branch.php" method="POST" class="styled-form">
+        <form action="branch/process_branch.php" method="POST" class="styled-form">
             <input type="hidden" name="branch_id" value="<?= $branch['branch_id']; ?>">
 
             <div class="form-group">
                 <label for="branch_name">Branch Name <span class="required">*</span></label>
-                <input type="text" id="branch_name" name="branch_name" value="<?= htmlspecialchars($branch['branch_name']); ?>" placeholder="Enter branch name (e.g., Downtown Office)" required>
+                <input type="text" id="branch_name" name="branch_name" value="<?= htmlspecialchars($branch['branch_name']); ?>" placeholder="Enter branch name" required>
                 <span class="input-info">Maximum 100 characters</span>
             </div>
 
             <div class="form-group">
                 <label for="location">Branch Address</label>
-                <textarea id="location" name="location" rows="3" placeholder="Enter complete address including street, city, state, and postal code"><?= htmlspecialchars($branch['location']); ?></textarea>
-                <span class="input-info">Optional - Provide the full address of the branch</span>
+                <textarea id="location" name="location" rows="3" placeholder="Enter complete address"><?= htmlspecialchars($branch['location']); ?></textarea>
+                <span class="input-info">Optional</span>
             </div>
 
             <div class="form-group">
@@ -79,11 +75,11 @@ include '../partials/sidebar.php';
             </div>
 
             <div class="form-actions">
-                <a href="branch_list.php" class="btn-cancel-link">
+                <a href="index.php?view=branches" class="btn-cancel-link">
                     <i class="fas fa-arrow-left"></i> Back to Branches
                 </a>
                 <div class="action-right">
-                    <button type="button" onclick="window.location.href='branch_list.php'" class="btn-cancel">Cancel</button>
+                    <button type="button" onclick="window.location.href='index.php?view=branches'" class="btn-cancel">Cancel</button>
                     <button type="submit" name="update_branch" class="btn-primary">
                         Save Changes
                     </button>
@@ -92,5 +88,3 @@ include '../partials/sidebar.php';
         </form>
     </div>
 </div>
-
-<?php include '../partials/footer.php'; ?>

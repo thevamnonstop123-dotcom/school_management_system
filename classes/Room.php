@@ -8,8 +8,8 @@ class Room extends Model {
         $sql = "INSERT INTO {$this->table} (room_name, branch, capacity) VALUES (:name, :branch, :capacity)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
-            ':name' => htmlspecialchars(strip_tags($name)),
-            ':branch' => htmlspecialchars(strip_tags($branch)),
+            ':name' => $name,
+            ':branch' => $branch,
             ':capacity' => (int)$capacity
         ]);
     }
@@ -33,8 +33,8 @@ class Room extends Model {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
             ':id' => (int)$id,
-            ':name' => htmlspecialchars(strip_tags($name)),
-            ':branch' => htmlspecialchars(strip_tags($branch)),
+            ':name' => $name,
+            ':branch' => $branch,
             ':capacity' => (int)$capacity
         ]);
     }

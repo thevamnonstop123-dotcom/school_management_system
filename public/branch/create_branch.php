@@ -1,9 +1,3 @@
-<?php
-
-include '../partials/header.php';
-include '../partials/sidebar.php'; 
-?>
-
 <div class="main-content">
     <div class="page-header">
         <div class="header-left">
@@ -14,9 +8,9 @@ include '../partials/sidebar.php';
 
     <nav class="breadcrumb">
         <i class="fas fa-home"></i> 
-        <a href="../dashboard/index.php">Dashboard</a> 
+        <a href="index.php">Dashboard</a> 
         <i class="fas fa-chevron-right separator"></i> 
-        <a href="branch_list.php">Branches</a> 
+        <a href="index.php?view=branches">Branches</a> 
         <i class="fas fa-chevron-right separator"></i> 
         <span class="active">Create Branch</span>
     </nav>
@@ -32,7 +26,7 @@ include '../partials/sidebar.php';
             </div>
         </div>
 
-        <form action="process_branch.php" method="POST" class="styled-form">
+        <form action="branch/process_branch.php" method="POST" class="styled-form">
             <div class="form-group">
                 <label for="branch_name">Branch Name <span class="required">*</span></label>
                 <input type="text" id="branch_name" name="branch_name" placeholder="Enter branch name (e.g., Downtown Office)" required>
@@ -41,8 +35,8 @@ include '../partials/sidebar.php';
 
             <div class="form-group">
                 <label for="location">Branch Address</label>
-                <textarea id="location" name="location" rows="3" placeholder="Enter complete address including street, city, state, and postal code"></textarea>
-                <small class="input-info">Optional - Provide the full address of the branch</small>
+                <textarea id="location" name="location" rows="3" placeholder="Enter complete address"></textarea>
+                <small class="input-info">Optional</small>
             </div>
 
             <div class="form-group">
@@ -53,14 +47,14 @@ include '../partials/sidebar.php';
             <div class="form-group">
                 <label for="status">Status <span class="required">*</span></label>
                 <select id="status" name="status" required>
-                    <option value="" disabled selected>Select (Active, Inactive)</option>
+                    <option value="" disabled selected>Select Status</option>
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
                 </select>
             </div>
 
             <div class="form-actions">
-                <a href="branch_list.php" class="btn-secondary">
+                <a href="index.php?view=branches" class="btn-secondary">
                     <i class="fas fa-arrow-left"></i> Back to Branches
                 </a>
                 <div class="action-right">
@@ -73,5 +67,3 @@ include '../partials/sidebar.php';
         </form>
     </div>
 </div>
-
-<?php include '../partials/footer.php'; ?>

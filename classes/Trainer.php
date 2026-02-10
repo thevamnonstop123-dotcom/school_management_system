@@ -9,10 +9,10 @@
             VALUES (:full_name, :email, :specialization, :status, :phone_number, :avatar_url)";
             $stmt = $this->conn->prepare($sql);
 
-            $name = htmlspecialchars(strip_tags($name));
-            $email = htmlspecialchars(strip_tags($email));
-            $specialization = htmlspecialchars(strip_tags($specialization));
-            $status = htmlspecialchars(strip_tags($status));
+            $name = $name;  
+            $email = $email;
+            $specialization = $specialization;
+            $status = $status;
 
             return $stmt->execute([
                 ':full_name' => $name,
@@ -56,10 +56,10 @@
         $stmt = $this->conn->prepare($sql);
 
         return $stmt->execute([
-            ':name'           => htmlspecialchars(strip_tags($name)),
-            ':email'          => htmlspecialchars(strip_tags($email)),
-            ':specialization' => htmlspecialchars(strip_tags($specialization)),
-            ':phone'          => htmlspecialchars(strip_tags($phone)),
+            ':name'           => $name,
+            ':email'          => $email,
+            ':specialization' => $specialization,
+            ':phone'          => $phone,
             ':avatar'         => $avatar_url,
             ':id'             => $id
         ]);

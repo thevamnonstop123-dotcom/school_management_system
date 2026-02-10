@@ -1,10 +1,8 @@
 <?php
-require_once '../../classes/Room.php'; 
+require_once __DIR__ . '/../../classes/Room.php'; 
 $roomObj = new Room();
 $all_rooms = $roomObj->getAll();
 
-include '../partials/header.php';
-include '../partials/sidebar.php';
 ?>
 <div class="main-content">
     <?php if (isset($_GET['msg'])): ?>
@@ -35,7 +33,7 @@ include '../partials/sidebar.php';
     <div class="rooms-grid">
         <div class="card add-room-section">
             <h3>Add New Room</h3>
-            <form action="process_room.php" method="POST">
+            <form action="rooms/process_room.php" method="POST">
                 <div class="form-group">
                     <label>Branch</label>
                     <select name="branch" required>
@@ -79,29 +77,36 @@ include '../partials/sidebar.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($all_rooms as $room): ?>
-                        <tr>
-                            <td class="id-cell"><?= str_pad($room['room_id'], 3, '0', STR_PAD_LEFT); ?></td>
-                            <td class="room-name-cell"><strong><?= htmlspecialchars($room['room_name']); ?></strong></td>
-                            <td class="branch-cell"><?= htmlspecialchars($room['branch']); ?></td>
-                            <td>
-                                <?php 
-                                    $cap = (int)$room['capacity'];
-                                    $color = ($cap >= 100) ? 'red' : (($cap >= 50) ? 'purple' : (($cap >= 30) ? 'blue' : 'green'));
-                                ?>
-                                <span class="capacity-badge badge-<?= $color ?>"><?= $cap ?> seats</span>
-                            </td>
-                            <td class="actions-cell">
-                                <a href="edit_room.php?id=<?= $room['room_id'] ?>" class="btn-icon-edit"><i class="far fa-edit"></i></a>
-                                <a href="process_room.php?delete_id=<?= $room['room_id'] ?>" 
-                                class="btn-icon-delete" 
-                                onclick="return confirm('Delete this room?')"><i class="far fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <?php if(!empty($all_rooms)): ?>
+                        <?php foreach ($all_rooms as $room): ?>
+                            <tr>
+                                <td class="id-cell"><?= str_pad($room['room_id'], 3, '0', STR_PAD_LEFT); ?></td>
+                                <td class="room-name-cell"><strong><?= htmlspecialchars($room['room_name']); ?></strong></td>
+                                <td class="branch-cell"><?= htmlspecialchars($room['branch']); ?></td>
+                                <td>
+                                    <?php 
+                                        $cap = (int)$room['capacity'];
+                                        $color = ($cap >= 100) ? 'red' : (($cap >= 50) ? 'purple' : (($cap >= 30) ? 'blue' : 'green'));
+                                    ?>
+                                    <span class="capacity-badge badge-<?= $color ?>"><?= $cap ?> seats</span>
+                                </td>
+                                <td class="actions-cell">
+                                    <a href="index.php?view=edit_room&id=<?= $room['room_id'] ?>" class="btn-icon-edit">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a href="rooms/process_room.php?delete_id=<?= $room['room_id'] ?>" 
+                                       class="btn-icon-delete" 
+                                       onclick="return confirm('Delete this room?')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="5" style="text-align:center; padding:20px;">No rooms found.</td></tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<?php include '../partials/footer.php'; ?>

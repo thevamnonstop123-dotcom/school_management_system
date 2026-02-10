@@ -28,6 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const searchInput = document.querySelector('input[name="search"]');
 searchInput.addEventListener('input', (e) => {
     if (e.target.value == "") {
-        window.location.href = "trainer.php";
+        window.location.href = "index.php?view=trainers";
     }
 })

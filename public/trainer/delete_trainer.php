@@ -1,4 +1,6 @@
-<?php require_once '../../classes/Trainer.php';
+<?php 
+session_start();
+require_once '../../classes/Trainer.php';
 
 if (isset($_GET['id'])) {
     $trainerObj = new Trainer();
@@ -7,13 +9,9 @@ if (isset($_GET['id'])) {
     if ($trainerObj->delete($trainerId)) {
         $_SESSION['flash_message'] = "Trainer removed successfully!";
         $_SESSION['flash_type'] = "delete";
-        header("Location: trainer.php");
+        header("Location: ../index.php?view=trainers");
         exit();
-    } else {
-        echo "Error Could not delete trainer.";
     }
-} else {
-    header("Location: trainer.php");
-    exit();
 }
-
+header("Location: ../index.php?view=trainers");
+exit();

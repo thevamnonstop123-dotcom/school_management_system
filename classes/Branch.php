@@ -8,10 +8,10 @@ class Branch extends Model {
         $sql = "INSERT INTO {$this->table} (branch_name, location, phone, status) VALUES (:name, :location, :phone, :status)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
-            ':name' => htmlspecialchars(strip_tags($name)),
-            ':location' => htmlspecialchars(strip_tags($location)),
-            ':phone' => htmlspecialchars(strip_tags($phone)),
-            ':status' => htmlspecialchars(strip_tags($status))
+            ':name' => $name,
+            ':location' => $location,
+            ':phone' => $phone,
+            ':status' => $status
         ]);
     }
 
@@ -34,10 +34,10 @@ class Branch extends Model {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
             ':id' => (int)$id,
-            ':name' => htmlspecialchars(strip_tags($name)),
-            ':location' => htmlspecialchars(strip_tags($location)),
-            ':phone' => htmlspecialchars(strip_tags($phone)),
-            ':status' => htmlspecialchars(strip_tags($status))
+            ':name' => $name,
+            ':location' => $location,
+            ':phone' => $phone,
+            ':status' => $status
         ]);
     }
 
@@ -45,6 +45,20 @@ class Branch extends Model {
         $sql = "DELETE FROM {$this->table} WHERE branch_id = :id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([":id" => $id]);
+    }
+
+    public function search($term) {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE branch_name LIKE :term 
+                OR location LIKE :term 
+                OR phone LIKE :term 
+                ORDER BY branch_id DESC";
+        
+        $stmt = $this->conn->prepare($sql);
+        $searchTerm = "%$term%";
+        $stmt->execute([':term' => $searchTerm]);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getStats() {

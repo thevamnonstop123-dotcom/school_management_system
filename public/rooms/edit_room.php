@@ -1,20 +1,18 @@
 <?php
-require_once '../../classes/Room.php';
+require_once __DIR__ . '/../../classes/Room.php';
 $roomObj = new Room();
 
 if (isset($_GET['id'])) {
-    $room = $roomObj->getById($_GET['id']);
-    // If ID is wrong, go back
+    $room = $roomObj->getById((int)$_GET['id']);
     if (!$room) { 
-        header("Location: rooms.php");
+        header("Location: index.php?view=rooms");
         exit(); 
     }
 } else {
-    header("Location: rooms.php");
+    header("Location: index.php?view=rooms");
     exit();
 }
 
-include '../partials/header.php';
 ?>
 
 <main class="main-content">
@@ -22,7 +20,7 @@ include '../partials/header.php';
         <h3>Edit Room</h3>
         <p>Update information for <strong><?= htmlspecialchars($room['room_name']) ?></strong></p>
 
-        <form action="process_room.php" method="POST">
+        <form action="rooms/process_room.php" method="POST">
             <input type="hidden" name="room_id" value="<?= $room['room_id'] ?>">
 
             <div class="form-group">
@@ -35,7 +33,7 @@ include '../partials/header.php';
 
             <div class="form-group">
                 <label>Room Name</label>
-                <input type="text" name="room_name" value="<?= htmlspecialchars($room['room_name']) ?>" required>
+                <input class="myForm" type="text" name="room_name" value="<?= htmlspecialchars($room['room_name']) ?>" required>
             </div>
 
             <div class="form-group">
@@ -44,10 +42,9 @@ include '../partials/header.php';
             </div>
 
             <div class="form-actions">
-                <a href="rooms.php" class="btn-cancel" style="text-decoration: none; text-align: center;">Cancel</a>
+                <a href="index.php?view=rooms" class="btn-cancel" style="text-decoration: none; text-align: center; display: inline-block; line-height: 40px;">Cancel</a>
                 <button type="submit" name="update_room" class="btn-save">Update Room</button>
             </div>
         </form>
     </div>
 </main>
-<?php include '../partials/footer.php'; ?>
