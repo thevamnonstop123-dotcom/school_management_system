@@ -101,7 +101,6 @@
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     border: 1px solid #f1f5f9;
-    overflow: hidden;
 }
 
 .table-header {
@@ -196,13 +195,7 @@ td { padding: 16px 24px; border-bottom: 1px solid #f1f5f9; font-size: 14px; colo
     background-color: #f8fafc;
 }
 
-@media (max-width: 1200px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-}
 
-
-/* branch create */
-/* Form Container Styling */
 .form-container {
     max-width: 800px;
     background: white;
@@ -295,6 +288,7 @@ td { padding: 16px 24px; border-bottom: 1px solid #f1f5f9; font-size: 14px; colo
     color: white;
     border: none;
     padding: 12px 24px;
+    width: 300px;
     border-radius: 8px;
     font-weight: 500;
     cursor: pointer;
@@ -319,4 +313,10 @@ td { padding: 16px 24px; border-bottom: 1px solid #f1f5f9; font-size: 14px; colo
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+@media (max-width: 1200px) {
+    .stats-grid { 
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

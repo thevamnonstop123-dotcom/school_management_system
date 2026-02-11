@@ -1,11 +1,13 @@
 /* 1. Global & Layout */
 .auth-wrapper {
-    min-height: 100vh;
+    width: 1284px;
+    height: 889px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f4f7fe;
     padding: 20px;
+    margin: 0 auto;
 }
 
 .login-container {
@@ -13,15 +15,14 @@
     width: 100%;
     max-width: 900px; 
     background: white;
-    border-radius: 20px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* 2. Left Branding Side */
 .login-sidebar {
     flex: 1;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    background: linear-gradient(135deg, #4F46E5 0%,#9333EA 30%, #DB2777 100%);
     padding: 60px;
     display: flex;
     flex-direction: column;
@@ -35,10 +36,10 @@
 .login-sidebar::before {
     content: "";
     position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
+    top: -80px;
+    right: -80px;
+    width: 220px;
+    height: 220px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
 }
@@ -51,7 +52,7 @@
 
 .welcome-image img {
     width: 100%;
-    max-width: 250px;
+    max-width: 280px;
 }
 
 /* 3. Right Form Side */
@@ -91,14 +92,14 @@
 .input-icon-wrapper {
     position: relative;
     display: flex;
-    align-items: center; /* Centers items vertically */
+    align-items: center; 
 }
 
 .input-icon-wrapper i {
     position: absolute;
     color: #a0aec0;
     font-size: 0.9rem;
-    z-index: 2; /* Ensures icon stays above the background */
+    z-index: 2; 
 }
 
 .input-icon-wrapper i:first-child {
@@ -117,7 +118,7 @@
 
 .login-form-section .form-group input {
     width: 100%;
-    padding: 12px 15px 12px 42px; /* Top, Right, Bottom, Left (more room for icon) */
+    padding: 12px 15px 12px 42px; 
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     background: #f8fafc;
@@ -202,7 +203,6 @@
     font-weight: 600;
 }
 
-/* 7. Responsiveness */
 @media (max-width: 768px) {
     .login-container {
         flex-direction: column;

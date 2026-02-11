@@ -21,7 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_trainer'])) {
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === 0) {
         $fileName = time() . "_" . basename($_FILES['avatar']['name']);
         $targetPath = "../../assets/images/trainers/" . $fileName;
-
+        
+        // only run if file move success
         if (move_uploaded_file($_FILES['avatar']['tmp_name'], $targetPath)) {
             $avatar = $fileName;
         }

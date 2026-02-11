@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../classes/Room.php';
 $roomObj = new Room();
 
-// Handle CREATE
+
 if (isset($_POST['save_room'])) {
     $name = trim($_POST['room_name']);
     $branch = $_POST['branch'];
@@ -16,7 +16,7 @@ if (isset($_POST['save_room'])) {
     exit();
 }
 
-// Handle DELETE
+
 if (isset($_GET['delete_id'])) {
     $id = (int)$_GET['delete_id'];
     
@@ -28,7 +28,7 @@ if (isset($_GET['delete_id'])) {
     exit();
 }
 
-// Handle UPDATE
+
 if (isset($_POST['update_room'])) {
     $id = (int)$_POST['room_id'];
     $name = trim($_POST['room_name']);

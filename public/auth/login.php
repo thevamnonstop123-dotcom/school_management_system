@@ -5,7 +5,7 @@
         <div class="login-sidebar">
             <h1>Welcome</h1>
             <div class="welcome-image">
-                <img src="../../assets/images/mylogo.png" alt="Welcome Icon">
+                <img src="../../assets/images/mylogogold.png" alt="Welcome Icon">
             </div>
         </div>
 

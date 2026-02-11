@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="../../assets/css/auth.css">
     <link rel="stylesheet" href="../../assets/css/trainer.css">
     <link rel="stylesheet" href="../../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/rooms.css">
     <link rel="stylesheet" href="../../assets/css/branch.css">
     <title>Training School Management</title>
 </head>
 <body>
-    <div class="app-container" style="display: flex; min-height: 100vh; width: 100%;">
+    <div class="app-container">
+        <div class="hamburger">
+            <div class="hbg"></div>
+            <div class="hbg"></div>
+            <div class="hbg"></div>
+        </div>

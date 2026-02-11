@@ -26,7 +26,7 @@ header p {
 
 .rooms-grid {
     display: grid;
-    grid-template-columns: 450px 1fr;
+    grid-template-columns: 440px 1fr;
     gap: 24px;
     align-items: start;
 }
@@ -62,24 +62,6 @@ header p {
     margin-bottom: 6px;
 }
 
-.form-group select {
-    width: 100%;
-    padding: 10px 12px;
-    height: 42px;        
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    background-color: #ffffff;
-    font-size: 14px;
-    appearance: none;        /* remove default browser style */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.form-group select {
-    background-image: url("data:image/svg+xml;utf8,<svg fill='%2394a3b8' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-}
 
 .form-group input {
     width: 100%;
@@ -268,5 +250,9 @@ table tr:hover {
 @media (max-width: 1100px) {
     .rooms-grid {
         grid-template-columns: 1fr;
+    }
+
+    .add-room-section .form-group input {
+        width: 97%;
     }
 }

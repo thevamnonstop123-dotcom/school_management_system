@@ -3,7 +3,6 @@
 $current_view = $_GET['view'] ?? 'dashboard';
 
 function is_active($view, $current_view) {
-    // This allows the 'Branches' tab to stay purple even if the view is 'create_branch'
     if ($view === 'branches' && in_array($current_view, ['branches', 'create_branch', 'edit_branch'])) {
         return 'active';
     }
@@ -12,6 +11,7 @@ function is_active($view, $current_view) {
 ?>
 
 <aside class="sidebar">
+    <a href="javascript:void(0)" class="close-sidebar" id="closeSidebar">&times;</a>
     <div class="logo">
         <i class="fas fa-graduation-cap"></i>
         <div>
@@ -74,7 +74,7 @@ function is_active($view, $current_view) {
 
     <div class="user-profile">
         <div class="user-details">
-            <img src="assets/images/mylogo.png" alt="Admin">
+            <img src="../../assets/images/mylogo.png" alt="Admin">
             <div class="user-info">
                 <span class="user-name">Admin User</span>
                 <span class="user-role">Administrator</span>

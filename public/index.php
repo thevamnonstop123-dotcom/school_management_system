@@ -13,7 +13,7 @@ include 'partials/sidebar.php';
 
 <div class="main-content">
     <?php
-    $view = $_GET['view'] ?? 'branches';
+    $view = $_GET['view'] ?? 'trainer';
 
     switch($view) {
     case 'branches':

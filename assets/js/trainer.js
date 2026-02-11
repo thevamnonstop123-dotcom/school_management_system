@@ -31,3 +31,13 @@ searchInput.addEventListener('input', (e) => {
         window.location.href = "index.php?view=trainers";
     }
 })
+
+
+ function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('img-preview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+}
