@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(!isset($_SESSION["user_id"])) {
+    header("Location: auth/login.php");
+    exit();
+}
+
+$isAdmin = (isset($_SESSION["user_role"]) && $_SESSION["user_role"] === "admin");
+
 require_once '../classes/Branch.php';
 require_once '../classes/Trainer.php';
 require_once '../classes/Room.php';
@@ -38,7 +46,7 @@ include 'partials/sidebar.php';
         break;
         default:
             echo "<h1>Welcome</h1><p>Please select a menu.</p>";
-            break;
+        break;
     }
     ?>
 </div>

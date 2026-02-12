@@ -36,54 +36,61 @@ $stats = $branchObj->getStats();
             <h1>Branch Management</h1>
             <p>Manage all your branch locations</p>
         </div>
-        <a href="index.php?view=create_branch" class="btn-add">
-            <i class="fas fa-plus"></i> Add Branch
-        </a>
+       
+        <?php if($isAdmin): ?>
+            <a href="index.php?view=create_branch" class="btn-add">
+                <i class="fas fa-plus"></i> Add Branch
+            </a>
+        <?php endif; ?>
     </div>
 
     <nav class="breadcrumb">
         <i class="fas fa-home"></i> 
         <a href="index.php">Dashboard</a> 
-        <i class="fas fa-chevron-right separator"></i> 
-        <a href="index.php?view=branches">Branches</a> 
+            <?php if($isAdmin): ?>
+                <i class="fas fa-chevron-right separator"></i> 
+                <a href="index.php?view=branches">Branches</a>
+            <?php endif; ?>
         <i class="fas fa-chevron-right separator"></i> 
         <span class="active">Branch List</span>
     </nav>
 
     <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-content">
-                <span class="stat-label">Total Branches</span>
-                <h2 class="stat-number"><?= $stats['total']; ?></h2>
+        <?php if($isAdmin): ?>
+            <div class="stat-card">
+                <div class="stat-content">
+                    <span class="stat-label">Total Branches</span>
+                    <h2 class="stat-number"><?= $stats['total']; ?></h2>
+                </div>
+                <div class="stat-icon-box blue-bg"><i class="fas fa-building"></i></div>
             </div>
-            <div class="stat-icon-box blue-bg"><i class="fas fa-building"></i></div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-content">
-                <span class="stat-label">Active Branches</span>
-                <h2 class="stat-number text-success"><?= $stats['active']; ?></h2>
+            
+            <div class="stat-card">
+                <div class="stat-content">
+                    <span class="stat-label">Active Branches</span>
+                    <h2 class="stat-number text-success"><?= $stats['active']; ?></h2>
+                </div>
+                <div class="stat-icon-box green-bg"><i class="fas fa-check-circle"></i></div>
             </div>
-            <div class="stat-icon-box green-bg"><i class="fas fa-check-circle"></i></div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-content">
-                <span class="stat-label">Inactive Branches</span>
-                <h2 class="stat-number text-danger"><?= $stats['inactive']; ?></h2>
+            
+            <div class="stat-card">
+                <div class="stat-content">
+                    <span class="stat-label">Inactive Branches</span>
+                    <h2 class="stat-number text-danger"><?= $stats['inactive']; ?></h2>
+                </div>
+                <div class="stat-icon-box red-bg"><i class="fas fa-exclamation-circle"></i></div>
             </div>
-            <div class="stat-icon-box red-bg"><i class="fas fa-exclamation-circle"></i></div>
-        </div>
 
-        <div class="stat-card">
-            <div class="stat-content">
-                <span class="stat-label">This Month</span>
-                <h2 class="stat-number"><?= $stats['this_month'] ?? 0; ?></h2>
+            <div class="stat-card">
+                <div class="stat-content">
+                    <span class="stat-label">This Month</span>
+                    <h2 class="stat-number"><?= $stats['this_month'] ?? 0; ?></h2>
+                </div>
+                <div class="stat-icon-box purple-bg">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
             </div>
-            <div class="stat-icon-box purple-bg">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-        </div>
+        <?php endif; ?>
     </div>
 
     <div class="table-container card">
@@ -105,7 +112,10 @@ $stats = $branchObj->getStats();
                     <th>Location</th>
                     <th>Contact</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    
+                    <?php if($isAdmin): ?>
+                        <th>Actions</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -122,12 +132,14 @@ $stats = $branchObj->getStats();
                             </span>
                         </td>
                         <td class="actions-col">
-                            <a href="index.php?view=edit_branch&id=<?= $branch['branch_id']; ?>" class="edit-link">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            <a href="branch/process_branch.php?delete_id=<?= $branch['branch_id']; ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this branch?')">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
+                            <?php  if($isAdmin): ?>
+                                <a href="index.php?view=edit_branch&id=<?= $branch['branch_id']; ?>" class="edit-link">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a href="branch/process_branch.php?delete_id=<?= $branch['branch_id']; ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this branch?')">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>

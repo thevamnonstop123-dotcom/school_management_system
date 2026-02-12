@@ -31,7 +31,10 @@ header p {
     align-items: start;
 }
 
-/* Cards */
+/* layout for staff */
+.rooms-grid.is-staff {
+    grid-template-columns: 1fr; 
+}
 
 .card {
     background: #ffffff;

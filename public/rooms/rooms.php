@@ -30,32 +30,34 @@ $all_rooms = $roomObj->getAll();
         <p>Manage training rooms and their capacity</p>
     </header>
 
-    <div class="rooms-grid">
-        <div class="card add-room-section">
-            <h3>Add New Room</h3>
-            <form action="rooms/process_room.php" method="POST">
-                <div class="form-group">
-                    <label>Branch</label>
-                    <select name="branch" required>
-                        <option value="">Select Branch</option>
-                        <option value="Main Campus">Main Campus</option>
-                        <option value="Downtown Branch">Downtown Branch</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Room Name</label>
-                    <input type="text" name="room_name" placeholder="Enter room name" required>
-                </div>
-                <div class="form-group">
-                    <label>Capacity</label>
-                    <input type="number" name="capacity" placeholder="Enter room capacity" required>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" name="save_room" class="btn-save"><i class="fas fa-save"></i> Save Room</button>
-                    <button type="reset" class="btn-cancel">Cancel</button>
-                </div>
-            </form>
-        </div>
+    <div class="rooms-grid <?= !$isAdmin ? "is-staff" : '' ?>">
+        <?php if($isAdmin) : ?>
+            <div class="card add-room-section">
+                <h3>Add New Room</h3>
+                <form action="rooms/process_room.php" method="POST">
+                    <div class="form-group">
+                        <label>Branch</label>
+                        <select name="branch" required>
+                            <option value="">Select Branch</option>
+                            <option value="Main Campus">Main Campus</option>
+                            <option value="Downtown Branch">Downtown Branch</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Room Name</label>
+                        <input type="text" name="room_name" placeholder="Enter room name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Capacity</label>
+                        <input type="number" name="capacity" placeholder="Enter room capacity" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" name="save_room" class="btn-save"><i class="fas fa-save"></i> Save Room</button>
+                        <button type="reset" class="btn-cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        <?php endif; ?>
 
         <div class="card rooms-list-section">
             <div class="list-header">
@@ -73,7 +75,9 @@ $all_rooms = $roomObj->getAll();
                         <th>Room Name</th>
                         <th>Branch</th>
                         <th>Capacity</th>
-                        <th>Actions</th>
+                        <?php if($isAdmin): ?>
+                            <th>Actions</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,14 +95,16 @@ $all_rooms = $roomObj->getAll();
                                     <span class="capacity-badge badge-<?= $color ?>"><?= $cap ?> seats</span>
                                 </td>
                                 <td class="actions-cell">
-                                    <a href="index.php?view=edit_room&id=<?= $room['room_id'] ?>" class="btn-icon-edit">
-                                        <i class="far fa-edit"></i>
-                                    </a>
-                                    <a href="rooms/process_room.php?delete_id=<?= $room['room_id'] ?>" 
-                                       class="btn-icon-delete" 
-                                       onclick="return confirm('Delete this room?')">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    <?php if($isAdmin) : ?> 
+                                        <a href="index.php?view=edit_room&id=<?= $room['room_id'] ?>" class="btn-icon-edit">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <a href="rooms/process_room.php?delete_id=<?= $room['room_id'] ?>" 
+                                        class="btn-icon-delete" 
+                                        onclick="return confirm('Delete this room?')">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    <?php endif; ?> 
                                 </td>
                             </tr>
                         <?php endforeach; ?>

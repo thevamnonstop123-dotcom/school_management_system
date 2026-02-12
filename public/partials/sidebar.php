@@ -80,7 +80,7 @@ function is_active($view, $current_view) {
                 <span class="user-role">Administrator</span>
             </div>
         </div>
-        <a href="logout.php" class="logout-btn">
+        <a href="auth/logout.php" class="logout-btn">
             <i class="fas fa-sign-out-alt"></i>
         </a>
     </div>

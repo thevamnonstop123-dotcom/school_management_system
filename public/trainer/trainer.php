@@ -1,9 +1,7 @@
 <?php
-// 1. VIEW LOGIC & DATA FETCHING
 $action = $_GET['action'] ?? 'list';
 $search = $_GET['search'] ?? '';
 
-// Only execute listing logic if we aren't in the "Add" view
 if ($action === 'list') {
     $limit = 6;
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -18,11 +16,11 @@ if ($action === 'list') {
     }
     $totalPages = ceil($totalTrainers / $limit);
 }
+
 ?>
 
 <div class="container">
     <main class="main-content">
-
         <?php if ($action === 'add'): ?>
             <header>
                 <div class="title-section">
@@ -101,17 +99,24 @@ if ($action === 'list') {
                 </form>
             </section>
 
-        <?php else: ?>
+         <?php else: ?>
             <header>
                 <div class="title-section">
                     <h1>Trainers Management</h1>
                     <p>Manage and view all trainers in the system</p>
                 </div>
                 <div class="header-actions">
-                    <button class="btn-export"><i class="fas fa-download"></i> Export</button>
-                    <a href="index.php?view=trainers&action=add" class="btn-add">
-                        <i class="fas fa-plus"></i> Add Trainer
-                    </a>
+                    <button class="btn-export">
+                        <i class="fas fa-download"></i>
+                        Export
+                    </button>
+                    
+                    <?php if($isAdmin): ?>
+                        <a href="index.php?view=trainers&action=add" class="btn-add">
+                        <i class="fas fa-plus"></i>
+                        Add Trainer
+                        </a>
+                    <?php endif; ?>
                 </div>
             </header>
 
@@ -139,7 +144,9 @@ if ($action === 'list') {
                             <th>Name</th>
                             <th>Specialization</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <?php if($isAdmin): ?>
+                                <th>Actions</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -169,16 +176,19 @@ if ($action === 'list') {
                                         </span>
                                     </td>
                                     <td class="actions">
-                                        <i class="far fa-eye" title="View"></i>
 
-                                        <a href="trainer/edit_trainer.php?id=<?= $row['trainer_id']; ?>" title="Edit">
-                                            <i class="far fa-edit"></i>
-                                        </a>
+                                       <?php if($isAdmin) : ?>
+                                            <i class="far fa-eye" title="View"></i>
+                                            <a href="trainer/edit_trainer.php?id=<?= $row['trainer_id']; ?>" title="Edit">
+                                                <i class="far fa-edit"></i>
+                                            </a>
 
-                                        <a href="trainer/delete_trainer.php?id=<?= $row['trainer_id']; ?>"
-                                            onclick="return confirm('Are you sure you want to delete this trainer?');" title="Delete">
-                                            <i class="far fa-trash-alt"></i>
-                                        </a>
+                                            <a href="trainer/delete_trainer.php?id=<?= $row['trainer_id']; ?>"
+                                                onclick="return confirm('Are you sure you want to delete this trainer?');" title="Delete">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+                                        <?php endif; ?>
+                                        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -216,6 +226,5 @@ if ($action === 'list') {
                 </div>
             </section>
         <?php endif; ?>
-
     </main>
 </div>
