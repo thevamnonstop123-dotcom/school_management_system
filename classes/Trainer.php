@@ -9,11 +9,6 @@
             VALUES (:full_name, :email, :specialization, :status, :phone_number, :avatar_url)";
             $stmt = $this->conn->prepare($sql);
 
-            $name = $name;  
-            $email = $email;
-            $specialization = $specialization;
-            $status = $status;
-
             return $stmt->execute([
                 ':full_name' => $name,
                 ':email' => $email,

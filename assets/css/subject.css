@@ -1,0 +1,56 @@
+/* --- Subject Specific Table Styles --- */
+
+/* The Logo Container (Yellow Box) */
+.subject-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #f7df1e; /* JavaScript Yellow */
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 14px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+/* Fee Styling */
+.fee-text {
+    color: #10b981; /* Figma Green */
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* --- Layout Adjustments --- */
+
+.rooms-grid.admin-layout {
+    grid-template-columns: 1fr 380px; 
+}
+
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    resize: none;
+    font-size: 14px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.actions-cell a {
+    position: relative;
+    z-index: 999;
+    cursor: pointer !important;
+}
+
+.rooms-list-section {
+    position: relative;
+    z-index: 10;
+}

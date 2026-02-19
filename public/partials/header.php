@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="../../assets/css/rooms.css">
     <link rel="stylesheet" href="../../assets/css/branch.css">
+    <link rel="stylesheet" href="../../assets/css/subject.css">
+    <link rel="stylesheet" href="../../assets/css/schedule.css">
+    <link rel="stylesheet" href="../../assets/css/student_register.css">
     <title>Training School Management</title>
 </head>
 <body>

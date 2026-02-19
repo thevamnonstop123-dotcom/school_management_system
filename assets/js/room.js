@@ -9,7 +9,7 @@ setTimeout(() => {
 /* replaceState tells the browser: "Update the address bar with this new URL, but do not refresh the page */
 if (window.history.replaceState) {
     const url = new URL(window.location.href);
-    url.searchParams.delete('msg'); // Remove the msg parameter
+    url.searchParams.delete('msg'); 
     window.history.replaceState({ path: url.href }, '', url.href);
 }
 

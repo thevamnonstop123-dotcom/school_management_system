@@ -1,0 +1,313 @@
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+/* 1. Header Navigation */
+.figma-header {
+  height: 64px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1440px;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-icon {
+  background: #2563eb;
+  color: white;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+.logo-text strong {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+.logo-text span {
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.help-link {
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.login-nav-btn {
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* 2. Main Layout */
+.main-wrapper {
+  padding-top: 64px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  margin: 40px;
+}
+
+/* 3. Info Panel (Left) */
+.info-panel {
+  flex: 1;
+  background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+  color: white;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-icon-box {
+  background: rgba(255, 255, 255, 0.2);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 1.2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 48px;
+}
+
+.features-list {
+  list-style: none;
+}
+.features-list li {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.feat-icon {
+  background: rgba(255, 255, 255, 0.1);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.feat-text strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+.feat-text p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* 4. Form Panel (Right) */
+.form-panel {
+  flex: 1.2;
+  padding: 60px 80px;
+  background: white;
+}
+form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.form-header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.form-header p {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.profile-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.avatar-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #f3f4f6;
+  margin-bottom: 12px;
+}
+.avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.upload-btn {
+  background: #6b7280;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.input-group {
+  margin-bottom: 16px;
+}
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.input-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+.input-group input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+.readonly-input {
+  background: #f9fafb;
+  color: #6b7280;
+}
+
+.submit-btn {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.85rem;
+}
+.login-footer span {
+  color: #6b7280;
+}
+.login-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* 5. Responsive Design [Professional Step] */
+@media (max-width: 1024px) {
+  .register-container {
+    margin: 20px;
+  }
+  .info-panel {
+    padding: 40px;
+  }
+  .form-panel {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+  }
+  .info-panel {
+    display: none;
+  } /* Hide info panel on mobile to focus on form */
+  .form-panel {
+    padding: 30px 20px;
+  }
+  .header-container {
+    padding: 0 20px;
+  }
+  .logo-text span {
+    display: none;
+  }
+}

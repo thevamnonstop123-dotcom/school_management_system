@@ -8,7 +8,7 @@ if (!isset($_GET['id'])) {
     exit();
 }
 
-$id = (int)$_GET['id'];
+$id = $_GET['id'];
 $branch = $branchObj->getById($id);
 
 if (!$branch) {

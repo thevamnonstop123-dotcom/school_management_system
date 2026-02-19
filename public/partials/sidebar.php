@@ -1,12 +1,22 @@
 <?php
-
 $current_view = $_GET['view'] ?? 'dashboard';
 
-function is_active($view, $current_view) {
-    if ($view === 'branches' && in_array($current_view, ['branches', 'create_branch', 'edit_branch'])) {
+function is_active($menu_item, $current_view) {
+    $menu_groups = [
+        'dashboard' => ['dashboard'],
+        'trainers'  => ['trainers', 'create_trainer', 'edit_trainer'],
+        'students'  => ['students', 'create_student', 'edit_student'],
+        'rooms'     => ['rooms', 'edit_room'],
+        'schedule' => ['schedule', 'create_schedule', 'edit_schedule'],
+        'subjects'  => ['subjects', 'edit_subject'],
+        'branches'  => ['branches', 'create_branch', 'edit_branch']
+    ];
+
+    if (isset($menu_groups[$menu_item]) && in_array($current_view, $menu_groups[$menu_item])) {
         return 'active';
     }
-    return ($view === $current_view) ? 'active' : '';
+    
+    return '';
 }
 ?>
 
@@ -49,6 +59,18 @@ function is_active($view, $current_view) {
             <li class="<?= is_active('rooms', $current_view); ?>">
                 <a href="index.php?view=rooms">
                     <i class="fas fa-door-open"></i> <span>Rooms</span>
+                </a>
+            </li>
+
+            <li class="<?= is_active('schedule', $current_view); ?>">
+                <a href="index.php?view=schedule">
+                    <i class="fas fa-calendar-alt"></i> <span>Schedule</span>
+                </a>
+            </li>
+
+            <li class="<?= is_active('subjects', $current_view); ?>">
+                <a href="index.php?view=subjects">
+                    <i class="fas fa-book-open"></i> <span>Subjects</span>
                 </a>
             </li>
 

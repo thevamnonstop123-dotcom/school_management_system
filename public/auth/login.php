@@ -38,7 +38,14 @@
                 <button type="submit" class="btn-login">Sign in to your account</button>
             </form>
             
-            <p class="auth-footer">Don't have an account?</p>
+            <div class="auth-footer" style="margin-top: 20px; text-align: center;">
+                <p>Don't have an account? 
+                    <a href="student_register.php" style="color: #4f46e5; font-weight: 600; text-decoration: none;">
+                        Create Student Account
+                    </a>
+                </p>
+            </div>
+            
             <a href="register.php" class="auth-footer2">Sign up for free</a>
         </div>
     </div>

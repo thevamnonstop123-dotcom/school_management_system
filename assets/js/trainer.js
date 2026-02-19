@@ -26,12 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const searchInput = document.querySelector('input[name="search"]');
-searchInput.addEventListener('input', (e) => {
-    if (e.target.value == "") {
-        window.location.href = "index.php?view=trainers";
-    }
-})
+const urlParams = new URLSearchParams(window.location.search);
+const currentView = urlParams.get('view');
 
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        // Only redirect to trainers if the search is empty AND we are on the trainer view
+        if (e.target.value === "" && currentView === 'trainers') {
+            window.location.href = "index.php?view=trainers";
+        } 
+        // If we are on the schedule view and clear the search, go back to full schedule list
+        else if (e.target.value === "" && currentView === 'schedule') {
+            window.location.href = "index.php?view=schedule";
+        }
+    });
+}
 
  function previewImage(event) {
         const reader = new FileReader();
