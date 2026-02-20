@@ -60,7 +60,7 @@ include '../partials/header.php';
             </div>
 
             <div class="form-panel">
-                <form action="process_student_register.php" method="POST" enctype="multipart/form-data">
+                <form class="student_fm" action="process_student_register.php" method="POST" enctype="multipart/form-data">
                     <div class="form-header">
                         <h2>Student Registration</h2>
                         <p>Fill in your information to create your student account</p>

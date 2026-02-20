@@ -25,9 +25,18 @@ if (isset($_GET['id'])) {
 
             <div class="form-group">
                 <label>Branch</label>
-                <select name="branch" required>
-                    <option value="Main Campus" <?= $room['branch'] == 'Main Campus' ? 'selected' : '' ?>>Main Campus</option>
-                    <option value="Downtown Branch" <?= $room['branch'] == 'Downtown Branch' ? 'selected' : '' ?>>Downtown Branch</option>
+                <select name="branch_id" required>
+                    <option value="">Select Branch</option>
+                    <?php 
+                    $branchObj = new Branch();
+                    $branches = $branchObj->getAll();
+                    foreach($branches as $branch): 
+                        $selected = ($branch['branch_id'] == $room['branch_id']) ? 'selected' : '';
+                    ?>
+                        <option value="<?= $branch['branch_id'] ?>" <?= $selected ?>>
+                            <?= htmlspecialchars($branch['branch_name']) ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 

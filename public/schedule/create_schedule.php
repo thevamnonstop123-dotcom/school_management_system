@@ -12,6 +12,7 @@
 
         <form action="schedule/process_schedule.php" method="POST" class="main-form">
             <div class="input-grid">
+                <!-- Room -->
                 <div class="field-box">
                     <label>Room <span>*</span></label>
                     <select name="room_id" required>
@@ -21,6 +22,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+
+                <!-- Trainer -->
                 <div class="field-box">
                     <label>Trainer <span>*</span></label>
                     <select name="trainer_id" required>
@@ -31,6 +34,7 @@
                     </select>
                 </div>
 
+                <!-- Subject -->
                 <div class="field-box">
                     <label>Subject <span>*</span></label>
                     <select name="subject_id" required>
@@ -40,6 +44,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+
+                <!-- Branch -->
                 <div class="field-box">
                     <label>Branch <span>*</span></label>
                     <select name="branch_id" required>
@@ -50,6 +56,7 @@
                     </select>
                 </div>
 
+                <!-- Day of Week - Full Width -->
                 <div class="field-box full-span">
                     <label>Day of Week <span>*</span></label>
                     <select name="day_of_week" required>
@@ -64,34 +71,39 @@
                     </select>
                 </div>
 
+                <!-- Start Time -->
                 <div class="field-box">
                     <label>Start Time <span>*</span></label>
                     <input type="time" name="start_time" required>
                 </div>
+
+                <!-- End Time -->
                 <div class="field-box">
                     <label>End Time <span>*</span></label>
                     <input type="time" name="end_time" required>
                 </div>
             </div>
 
+            <!-- Status Section -->
             <div class="status-selection">
                 <label>Status <span>*</span></label>
                 <div class="pill-group">
                     <label class="pill">
                         <input type="radio" name="status" value="Active" checked>
-                        <span class="pill-btn active-pill">● Active</span>
+                        <span class="pill-btn active-pill">Active</span>
                     </label>
                     <label class="pill">
                         <input type="radio" name="status" value="Coming Soon">
-                        <span class="pill-btn coming-pill">● Coming Soon</span>
+                        <span class="pill-btn coming-pill">Coming Soon</span>
                     </label>
                     <label class="pill">
                         <input type="radio" name="status" value="Completed">
-                        <span class="pill-btn completed-pill">● Completed</span>
+                        <span class="pill-btn completed-pill">Completed</span>
                     </label>
                 </div>
             </div>
 
+            <!-- Form Buttons -->
             <div class="form-bottom">
                 <button type="button" class="btn-cancel-flat" onclick="window.location.href='index.php?view=schedule'">Cancel</button>
                 <button type="submit" name="create_schedule" class="btn-create-purple">

@@ -1,33 +1,37 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])) {
+
+if(!isset($_SESSION["user_id"]) && !isset($_SESSION["student_id"])) {
     header("Location: auth/login.php");
     exit();
 }
 
+
 $isAdmin = (isset($_SESSION["user_role"]) && $_SESSION["user_role"] === "admin");
+$isStudent = (isset($_SESSION["user_role"]) && $_SESSION["user_role"] === "student");
+
 
 require_once '../classes/Branch.php';
 require_once '../classes/Trainer.php';
 require_once '../classes/Room.php';
 require_once '../classes/Subject.php';
 require_once '../classes/Schedule.php';
+require_once '../classes/Student.php';
 
 $branchObj = new Branch();
 $trainerObj = new Trainer();
 $roomObj = new Room();
 $subjectObj = new Subject();
 $scheduleObj = new Schedule();
-
+$studentObj = new Student();
 
 include 'partials/header.php'; 
 include 'partials/sidebar.php'; 
 ?>
 
 <div class="main-content">
-    <?php
+<?php
     $view = $_GET['view'] ?? 'trainer';
-
     switch($view) {
     case 'branches':
         include 'branch/branch_list.php';
@@ -97,10 +101,73 @@ include 'partials/sidebar.php';
     case 'edit_room':
                 include 'rooms/edit_room.php';
         break;
-    default:
-            echo "<h1>Welcome</h1><p>Please select a menu.</p>";
+
+    case 'it_classes':
+        require_once '../classes/Subject.php';
+        require_once '../classes/Student.php';
+        $subjectObj = new Subject();
+        $studentObj = new Student();
+        include 'student/it_classes.php';
         break;
-    }
+    case 'cart':
+        require_once '../classes/Student.php';
+        $studentObj = new Student();
+        include 'student/cart.php';
+        break;
+
+    case 'my_class':
+        require_once '../classes/Student.php';
+        require_once '../classes/Subject.php';
+        $studentObj = new Student();
+        $subjectObj = new Subject();
+        include 'student/my_class.php';
+        break;
+
+    case 'student_schedule':
+        require_once '../classes/Student.php';
+        require_once '../classes/Schedule.php';
+        $studentObj = new Student();
+        $scheduleObj = new Schedule();
+        include 'student/schedule.php';
+        break;
+
+    case 'checkout':
+        require_once '../classes/Student.php';
+        require_once '../classes/Subject.php';
+        $studentObj = new Student();
+        $subjectObj = new Subject();
+        include 'student/checkout.php';
+        break;
+
+    case 'profile':
+        require_once '../classes/Student.php';
+        require_once '../classes/Payment.php';
+        $studentObj = new Student();
+        $paymentObj = new Payment();
+        include 'student/profile.php';
+        break;
+
+    case 'payment_confirm':
+        require_once '../classes/Payment.php';
+        $paymentObj = new Payment();
+        include 'reports/payment_confirm.php';
+        break;
+
+    default:
+        if ($isStudent) {
+            header("Location: index.php?view=my_class");
+            exit();
+        }
+        else if ($isAdmin) {
+            header("Location: index.php?view=trainers");
+            exit();
+        }
+        else {
+            header("Location: index.php?view=trainers");
+            exit();
+        }
+        break;
+     }
     ?>
 </div>
 

@@ -37,10 +37,17 @@ $all_rooms = $roomObj->getAll();
                 <form action="rooms/process_room.php" method="POST">
                     <div class="form-group">
                         <label>Branch</label>
-                        <select name="branch" required>
+                        <select name="branch_id" required>
                             <option value="">Select Branch</option>
-                            <option value="Main Campus">Main Campus</option>
-                            <option value="Downtown Branch">Downtown Branch</option>
+                            <?php 
+                            $branchObj = new Branch();
+                            $branches = $branchObj->getAll();
+                            foreach($branches as $branch): 
+                            ?>
+                                <option value="<?= $branch['branch_id'] ?>">
+                                    <?= htmlspecialchars($branch['branch_name']) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -86,7 +93,9 @@ $all_rooms = $roomObj->getAll();
                             <tr>
                                 <td class="id-cell"><?= str_pad($room['room_id'], 3, '0', STR_PAD_LEFT); ?></td>
                                 <td class="room-name-cell"><strong><?= htmlspecialchars($room['room_name']); ?></strong></td>
-                                <td class="branch-cell"><?= htmlspecialchars($room['branch']); ?></td>
+                                <td class="branch-cell">
+                                    <?= htmlspecialchars($room['branch_name'] ?? 'Unknown Branch'); ?>
+                                </td>
                                 <td>
                                     <?php 
                                         $cap = (int)$room['capacity'];

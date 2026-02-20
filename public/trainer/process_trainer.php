@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-require_once '../../classes/Trainer.php';
+require_once __DIR__ . '/../../classes/Trainer.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_trainer'])) {
     

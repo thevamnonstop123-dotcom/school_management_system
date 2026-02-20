@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once '../../classes/Trainer.php';
+require_once __DIR__ . '/../../classes/Trainer.php';
 
 if (isset($_GET['id'])) {
     $trainerObj = new Trainer();

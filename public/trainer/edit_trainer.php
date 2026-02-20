@@ -1,5 +1,5 @@
 <?php 
-require_once '../../classes/Trainer.php';
+require_once __DIR__ . '/../../classes/Trainer.php';
 $trainerObj = new Trainer();
 
 $id = $_GET['id'] ?? null;

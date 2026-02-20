@@ -5,16 +5,15 @@ class Schedule extends Model {
     protected $table = "schedules";
 
     public function getAllSchedules() {
-        $sql = "SELECT s.*, 
-                       sub.title as subject_name, 
-                       t.full_name as trainer_name, 
-                       r.room_name as room_name 
-                FROM {$this->table} s
-                JOIN subjects sub ON s.subject_id = sub.subject_id
-                JOIN trainers t ON s.trainer_id = t.trainer_id
-                JOIN rooms r ON s.room_id = r.room_id
-                ORDER BY s.created_at DESC";
-        
+    $sql = "SELECT s.*, 
+       sub.title as subject_name, 
+       t.full_name as trainer_name, 
+       r.room_name as room_name 
+        FROM schedules s
+        JOIN subjects sub ON s.subject_id = sub.subject_id
+        JOIN trainers t ON s.trainer_id = t.trainer_id
+        JOIN rooms r ON s.room_id = r.room_id";
+    
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

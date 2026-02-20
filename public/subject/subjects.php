@@ -1,7 +1,4 @@
 <?php
-// We don't need to define $isAdmin or $all_subjects here, 
-// they are already available from index.php
-
 $isEdit = ($view === 'edit_subject' && isset($subject_data));
 $formTitle = $isEdit ? "Edit Subject" : "Add New Subject";
 $btnName = $isEdit ? "update_subject" : "create_subject";
