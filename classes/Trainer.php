@@ -111,5 +111,45 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total'];
     }
-    }  
+
+        /**
+     * Check if trainer has any schedules
+     */
+    public function hasSchedules($trainer_id) {
+        $sql = "SELECT COUNT(*) as count FROM schedules WHERE trainer_id = :trainer_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':trainer_id' => $trainer_id]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
+    /**
+     * Get schedules for a trainer
+     */
+    public function getTrainerSchedules($trainer_id, $limit = 3) {
+        $sql = "SELECT s.*, sub.title as subject_name, s.day_of_week, s.start_time
+                FROM schedules s
+                JOIN subjects sub ON s.subject_id = sub.subject_id
+                WHERE s.trainer_id = :trainer_id
+                LIMIT :limit";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':trainer_id', $trainer_id, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Delete trainer avatar file
+     */
+    public function deleteAvatarFile($avatar_url) {
+        if (!empty($avatar_url) && $avatar_url != 'default-avatar.png') {
+            $avatarPath = __DIR__ . '/../public/assets/images/trainers/' . $avatar_url;
+            if (file_exists($avatarPath)) {
+                return unlink($avatarPath);
+            }
+        }
+        return true;
+    }
+ }  
 ?>

@@ -11,12 +11,13 @@ function is_active($menu_item, $current_view) {
         'schedule' => ['schedule', 'create_schedule', 'edit_schedule'],
         'subjects'  => ['subjects', 'edit_subject'],
         'branches'  => ['branches', 'create_branch', 'edit_branch'],
+        'reports' => ['payment_confirm'],
         
         // Student menu groups
         'it_classes' => ['it_classes'],
         'my_class' => ['my_class'],
         'student_schedule' => ['student_schedule'],
-        'student_profile' => ['student_profile']
+        'profile' => ['profile']
     ];
 
     if (isset($menu_groups[$menu_item]) && in_array($current_view, $menu_groups[$menu_item])) {
@@ -114,7 +115,7 @@ function is_active($menu_item, $current_view) {
                     </a>
                 </li>
 
-                <li class="<?= is_active('payment_confirm', $current_view); ?>">
+                <li class="<?= is_active('reports', $current_view); ?>">
                     <a href="index.php?view=payment_confirm">
                         <i class="fas fa-chart-bar"></i> <span>Reports</span> 
                     </a>

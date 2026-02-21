@@ -201,7 +201,9 @@ class Student extends Model {
                     t.full_name as instructor_name,
                     sched.day_of_week,
                     sched.start_time,
-                    sched.end_time
+                    sched.end_time,
+                    COALESCE(e.progress, 0) as progress,
+                    DATEDIFF(sched.end_time, NOW()) as weeks_left
                 FROM enrollments e
                 JOIN subjects sub ON e.subject_id = sub.subject_id
                 LEFT JOIN schedules sched ON sub.subject_id = sched.subject_id
@@ -223,6 +225,91 @@ class Student extends Model {
     return $stmt->execute([
         ':student_id' => $student_id,
         ':subject_id' => $subject_id
+    ]);
+}
+
+/**
+ * Get students with pagination
+ */
+public function getStudentsWithPagination($offset, $limit) {
+    $sql = "SELECT * FROM {$this->table} ORDER BY created_at DESC LIMIT :offset, :limit";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Search students with pagination
+ */
+public function searchStudents($search, $offset, $limit) {
+    $sql = "SELECT * FROM {$this->table} 
+            WHERE first_name LIKE :search 
+            OR last_name LIKE :search 
+            OR email LIKE :search 
+            OR sid_code LIKE :search
+            ORDER BY created_at DESC 
+            LIMIT :offset, :limit";
+    
+    $stmt = $this->conn->prepare($sql);
+    $searchTerm = "%$search%";
+    $stmt->bindValue(':search', $searchTerm, PDO::PARAM_STR);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Count search results for students
+ */
+public function countSearchStudents($search) {
+    $sql = "SELECT COUNT(*) as total FROM {$this->table} 
+            WHERE first_name LIKE :search 
+            OR last_name LIKE :search 
+            OR email LIKE :search 
+            OR sid_code LIKE :search";
+    
+    $stmt = $this->conn->prepare($sql);
+    $searchTerm = "%$search%";
+    $stmt->bindValue(':search', $searchTerm, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+/**
+ * Get total number of students
+ */
+public function getTotalStudents() {
+    $sql = "SELECT COUNT(*) as total FROM {$this->table}";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'];
+}
+
+/**
+ * Get enrollment count for a student
+ */
+public function getEnrollmentCount($student_id) {
+    $sql = "SELECT COUNT(*) as total FROM enrollments WHERE student_id = :student_id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([':student_id' => $student_id]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
+
+/**
+ * Update student status (Active/Inactive/Pending)
+ */
+public function updateStatus($student_id, $status) {
+    $sql = "UPDATE {$this->table} SET status = :status WHERE student_id = :student_id";
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([
+        ':student_id' => $student_id,
+        ':status' => $status
     ]);
 }
 }

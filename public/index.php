@@ -6,10 +6,8 @@ if(!isset($_SESSION["user_id"]) && !isset($_SESSION["student_id"])) {
     exit();
 }
 
-
 $isAdmin = (isset($_SESSION["user_role"]) && $_SESSION["user_role"] === "admin");
 $isStudent = (isset($_SESSION["user_role"]) && $_SESSION["user_role"] === "student");
-
 
 require_once '../classes/Branch.php';
 require_once '../classes/Trainer.php';
@@ -17,13 +15,16 @@ require_once '../classes/Room.php';
 require_once '../classes/Subject.php';
 require_once '../classes/Schedule.php';
 require_once '../classes/Student.php';
+require_once '../classes/Payment.php';
 
+// Create all objects once
 $branchObj = new Branch();
 $trainerObj = new Trainer();
 $roomObj = new Room();
 $subjectObj = new Subject();
 $scheduleObj = new Schedule();
 $studentObj = new Student();
+$paymentObj = new Payment();
 
 include 'partials/header.php'; 
 include 'partials/sidebar.php'; 
@@ -32,143 +33,86 @@ include 'partials/sidebar.php';
 <div class="main-content">
 <?php
     $view = $_GET['view'] ?? 'trainer';
-    switch($view) {
-    case 'branches':
-        include 'branch/branch_list.php';
-        break;
-    case 'subjects':
-        $all_subjects = $subjectObj->getAll();
-        include 'subject/subjects.php';
-        break;
-
-    case 'edit_subject':
-        if(isset($_GET['id'])) {
-            $subject_data = $subjectObj->getById($_GET['id']);
-            $all_subjects = $subjectObj->getAll(); 
-            include 'subject/subjects.php';
-        }
-        break;
-    case 'schedule':
-        $search = $_GET['search'] ?? '';
-        $limit = 6;
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $offset = ($page - 1) * $limit;
-
-        if (!empty($search)) {
-            $all_schedules = $scheduleObj->searchWithPagination($search, $offset, $limit);
-            $totalSchedules = $scheduleObj->countSearch($search);
-        } else {
-            $all_schedules = $scheduleObj->getSchedulesWithPagination($offset, $limit);
-            $totalSchedules = $scheduleObj->getTotalCount();
-        }
+    
+    // Define view mappings
+    $view_map = [
+        // Admin views
+        'branches' => 'branch/branch_list.php',
+        'create_branch' => 'branch/create_branch.php',
+        'edit_branch' => 'branch/edit_branch.php',
+        'subjects' => 'subject/subjects.php',
+        'edit_subject' => 'subject/subjects.php',
+        'schedule' => 'schedule/schedule_list.php',
+        'create_schedule' => 'schedule/create_schedule.php',
+        'edit_schedule' => 'schedule/edit_schedule.php',
+        'trainers' => 'trainer/trainer.php',
+        'rooms' => 'rooms/rooms.php',
+        'edit_room' => 'rooms/edit_room.php',
+        'payment_confirm' => 'reports/payment_confirm.php',
+        'courses' => 'courses/courses.php',  // Add this
+        'students' => 'students/students.php', // Add this
         
-        $totalPages = ceil($totalSchedules / $limit);
-        include 'schedule/schedule_list.php';
-        break;
-    case 'create_schedule':
-        $rooms = $roomObj->getAll();
-        $trainers = $trainerObj->getAllTrainers();
-        $subjects = $subjectObj->getAll();
-        $branches = $branchObj->getAll();
-        include 'schedule/create_schedule.php';
-        break;
-    case 'edit_schedule':
-        if(isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $schedule_data = $scheduleObj->getById($id);
+        // Student views
+        'it_classes' => 'student/it_classes.php',
+        'cart' => 'student/cart.php',
+        'my_class' => 'student/my_class.php',
+        'student_schedule' => 'student/schedule.php',
+        'checkout' => 'student/checkout.php',
+        'profile' => 'student/profile.php'
+    ];
+
+    switch($view) {
+        // Admin data preparation
+        case 'subjects':
+        case 'edit_subject':
+            if ($view == 'edit_subject' && isset($_GET['id'])) {
+                $subject_data = $subjectObj->getById($_GET['id']);
+            }
+            $all_subjects = $subjectObj->getAll();
+            break;
+            
+        case 'create_schedule':
+        case 'edit_schedule':
             $rooms = $roomObj->getAll();
             $trainers = $trainerObj->getAllTrainers();
             $subjects = $subjectObj->getAll();
             $branches = $branchObj->getAll();
             
-            include 'schedule/edit_schedule.php';
-        }
-        break;
-    case 'create_branch':
-        include 'branch/create_branch.php';
-        break;
-    case 'edit_branch':
-        include 'branch/edit_branch.php';
-        break;
-    case 'trainers':
+            if ($view == 'edit_schedule' && isset($_GET['id'])) {
+                $schedule_data = $scheduleObj->getById($_GET['id']);
+            }
+            break;
+            
+        case 'trainers':
             $trainers = $trainerObj->getAllTrainers();
-            include 'trainer/trainer.php';
             break;
-    case 'rooms':
-                $all_rooms = $roomObj->getAll();
-                include 'rooms/rooms.php';
+            
+        case 'rooms':
+            $all_rooms = $roomObj->getAll();
             break;
-    case 'edit_room':
-                include 'rooms/edit_room.php';
-        break;
-
-    case 'it_classes':
-        require_once '../classes/Subject.php';
-        require_once '../classes/Student.php';
-        $subjectObj = new Subject();
-        $studentObj = new Student();
-        include 'student/it_classes.php';
-        break;
-    case 'cart':
-        require_once '../classes/Student.php';
-        $studentObj = new Student();
-        include 'student/cart.php';
-        break;
-
-    case 'my_class':
-        require_once '../classes/Student.php';
-        require_once '../classes/Subject.php';
-        $studentObj = new Student();
-        $subjectObj = new Subject();
-        include 'student/my_class.php';
-        break;
-
-    case 'student_schedule':
-        require_once '../classes/Student.php';
-        require_once '../classes/Schedule.php';
-        $studentObj = new Student();
-        $scheduleObj = new Schedule();
-        include 'student/schedule.php';
-        break;
-
-    case 'checkout':
-        require_once '../classes/Student.php';
-        require_once '../classes/Subject.php';
-        $studentObj = new Student();
-        $subjectObj = new Subject();
-        include 'student/checkout.php';
-        break;
-
-    case 'profile':
-        require_once '../classes/Student.php';
-        require_once '../classes/Payment.php';
-        $studentObj = new Student();
-        $paymentObj = new Payment();
-        include 'student/profile.php';
-        break;
-
-    case 'payment_confirm':
-        require_once '../classes/Payment.php';
-        $paymentObj = new Payment();
-        include 'reports/payment_confirm.php';
-        break;
-
-    default:
+            
+        case 'it_classes':
+        case 'cart':
+        case 'my_class':
+        case 'student_schedule':
+        case 'checkout':
+        case 'profile':
+            break;
+    }
+    
+    // Include the view file if it exists in map
+    if (isset($view_map[$view])) {
+        include $view_map[$view];
+    } else {
+        // Redirect based on user role
         if ($isStudent) {
             header("Location: index.php?view=my_class");
-            exit();
-        }
-        else if ($isAdmin) {
+        } else {
             header("Location: index.php?view=trainers");
-            exit();
         }
-        else {
-            header("Location: index.php?view=trainers");
-            exit();
-        }
-        break;
-     }
-    ?>
+        exit();
+    }
+?>
 </div>
 
 <?php include 'partials/footer.php'; ?>

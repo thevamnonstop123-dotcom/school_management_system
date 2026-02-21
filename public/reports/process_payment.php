@@ -3,7 +3,6 @@ session_start();
 require_once __DIR__ . '/../../classes/Student.php';
 require_once __DIR__ . '/../../classes/Payment.php';
 
-// Check if admin is logged in
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header("Location: ../auth/login.php");
     exit();
