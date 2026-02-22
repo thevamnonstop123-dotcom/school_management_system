@@ -1,22 +1,22 @@
 <?php
 session_start();
-require_once "../../classes/User.php";  // For admin/staff
-require_once "../../classes/Student.php"; // For students
+require_once "../../classes/Admin.php";  
+require_once "../../classes/Student.php"; 
 
-$userModel = new User();
+$adminModel = new Admin();
 $studentModel = new Student();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $user = $userModel->login($email, $password);
-    if ($user) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['full_name'];
-        $_SESSION['user_role'] = $user['role']; 
-        
-        header("Location: ../index.php?view=trainer");
+    $admin = $adminModel->login($email, $password);
+    if($admin && password_verify($password, $admin['password'])) {
+        $_SESSION['user_id']  = $admin['admin_id'];
+        $_SESSION['user_name'] = $admin['first_name']. ' ' . $admin['last_name'];
+        $_SESSION['user_role'] = $admin['admin_role'];
+
+        header("Location: ../index.php?view=dashboard");
         exit();
     }
     
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($student && password_verify($password, $student['password'])) {
         $_SESSION['student_id'] = $student['student_id'];
         $_SESSION['student_name'] = $student['first_name'] . ' ' . $student['last_name'];
-        $_SESSION['user_role'] = 'student'; // Set role to student
+        $_SESSION['user_role'] = 'student';
         
         header("Location: ../index.php?view=my_class");
         exit();

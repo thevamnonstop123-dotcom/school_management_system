@@ -1,0 +1,126 @@
+/* Students Table - Clean Professional Look */
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.students-table th {
+    text-align: left;
+    padding: 16px 12px;
+    background: #f8fafc;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.students-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e293b;
+}
+
+/* ID cell */
+.id-cell {
+    font-weight: 600;
+    color: #6366f1;
+    font-family: monospace;
+}
+
+/* Name cell */
+.name-cell {
+    font-weight: 500;
+}
+
+/* Email cell */
+.email-cell a {
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.email-cell a:hover {
+    text-decoration: underline;
+}
+
+/* Phone cell */
+.phone-cell {
+    color: #475569;
+}
+
+/* DOB cell */
+.dob-cell {
+    color: #475569;
+}
+
+/* Enrolled courses badge */
+.course-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.course-badge.has-courses {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.course-badge.no-courses {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.pending {
+    background: #fff7ed;
+    color: #9a3412;
+}
+
+.status-badge.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Joined cell */
+.joined-cell {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* No data */
+.no-data {
+    text-align: center;
+    padding: 60px !important;
+    color: #94a3b8;
+}
+
+.no-data i {
+    color: #cbd5e1;
+    margin-bottom: 16px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .students-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

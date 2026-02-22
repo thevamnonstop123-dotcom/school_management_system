@@ -23,9 +23,11 @@ $totalPages = ceil($totalSchedules / $limit);
             <h1>Class Schedules</h1>
             <p>Manage and organize training schedules</p>
         </div>
-        <a href="index.php?view=create_schedule" class="btn-create-schedule">
-            <i class="fas fa-plus"></i> Create Schedule
-        </a>
+       <?php if($isAdmin): ?>
+            <a href="index.php?view=create_schedule" class="btn-create-schedule">
+                <i class="fas fa-plus"></i> Create Schedule
+            </a>
+        <?php endif; ?>
     </header>
 
     <div class="card filter-card">
@@ -95,7 +97,7 @@ $totalPages = ceil($totalSchedules / $limit);
                         <th>DAY</th>
                         <th>TIME</th>
                         <th>STATUS</th>
-                        <th>ACTIONS</th>
+                        <?php if($isAdmin): ?> <th>ACTIONS</th> <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,17 +116,19 @@ $totalPages = ceil($totalSchedules / $limit);
                                     <?= $row['status'] ?>
                                 </span>
                             </td>
-                            <td class="actions-cell">
-                                <a href="index.php?view=edit_schedule&id=<?= $row['schedule_id'] ?>" class="btn-edit">
-                                    <i class="far fa-edit"></i>
-                                </a>
+                            <?php if($isAdmin): ?>
+                                <td class="actions-cell">
+                                    <a href="index.php?view=edit_schedule&id=<?= $row['schedule_id'] ?>" class="btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </a>
 
-                                <a href="schedule/process_schedule.php?action=delete&id=<?= $row['schedule_id'] ?>"
-                                    class="btn-delete"
-                                    onclick="return confirm('Are you sure you want to delete this schedule?');">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
-                            </td>
+                                    <a href="schedule/process_schedule.php?action=delete&id=<?= $row['schedule_id'] ?>"
+                                        class="btn-delete"
+                                        onclick="return confirm('Are you sure you want to delete this schedule?');">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

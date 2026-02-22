@@ -45,7 +45,7 @@ class Payment extends Model {
     public function getPendingPayments() {
         $sql = "SELECT p.*, s.title as subject_name, 
                     stu.first_name, stu.last_name, stu.email,
-                    p.total_amount as amount  -- Use total_amount as amount
+                    p.total_amount as amount  
                 FROM {$this->table} p
                 JOIN subjects s ON p.subject_id = s.subject_id
                 JOIN students stu ON p.student_id = stu.student_id

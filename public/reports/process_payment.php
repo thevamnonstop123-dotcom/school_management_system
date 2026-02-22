@@ -3,7 +3,8 @@ session_start();
 require_once __DIR__ . '/../../classes/Student.php';
 require_once __DIR__ . '/../../classes/Payment.php';
 
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+$admin_roles = ['Administrator', 'Super Admin', 'Manager'];
+if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], $admin_roles)) {
     header("Location: ../auth/login.php");
     exit();
 }

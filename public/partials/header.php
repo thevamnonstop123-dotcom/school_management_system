@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../../assets/css/admin/branch.css">
     <link rel="stylesheet" href="../../assets/css/admin/subject.css">
     <link rel="stylesheet" href="../../assets/css/admin/schedule.css">
+    <link rel="stylesheet" href="../../assets/css/admin/students.css">
+    <link rel="stylesheet" href="../../assets/css/admin/courses.css">
     <link rel="stylesheet" href="../../assets/css/admin/payment_confirm.css">
     <link rel="stylesheet" href="../../assets/css/auth/auth.css">
     <link rel="stylesheet" href="../../assets/css/auth/student_register.css">
@@ -21,6 +23,7 @@
     <link rel="stylesheet" href="../../assets/css/student/schedule.css">
     <link rel="stylesheet" href="../../assets/css/partials/sidebar.css">
     <link rel="stylesheet" href="../../assets/css/partials/header.css">
+    <link rel="stylesheet" href="../../assets/css/auth/admin_register.css">
 
     <title>Training School Management</title>
 </head>

@@ -16,14 +16,11 @@ if (isset($_GET['id'])) {
         exit();
     }
     
-    // Check if trainer has any schedules - USING MODEL METHOD
     $scheduleCount = $trainerObj->hasSchedules($trainerId);
     
     if ($scheduleCount > 0) {
-        // Get schedule details - USING MODEL METHOD
         $schedules = $trainerObj->getTrainerSchedules($trainerId);
-        
-        // Build detailed error message
+    
         $message = "Cannot delete trainer <strong>" . htmlspecialchars($trainer['full_name']) . "</strong> because they are assigned to $scheduleCount schedule(s).";
         
         if (!empty($schedules)) {
