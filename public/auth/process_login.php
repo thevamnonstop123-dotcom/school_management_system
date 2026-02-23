@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($student && password_verify($password, $student['password'])) {
         $_SESSION['student_id'] = $student['student_id'];
         $_SESSION['student_name'] = $student['first_name'] . ' ' . $student['last_name'];
+        
         $_SESSION['user_role'] = 'student';
         
         header("Location: ../index.php?view=my_class");

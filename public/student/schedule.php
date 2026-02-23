@@ -72,7 +72,7 @@ $current_week = date('F j, Y');
         <?php endforeach; ?>
     </div>
 
-    <!-- Legend -->
+
     <div class="legend-figma">
         <div class="legend-item-figma">
             <span class="status-dot active"></span>

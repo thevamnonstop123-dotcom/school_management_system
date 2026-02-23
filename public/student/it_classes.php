@@ -2,11 +2,9 @@
 require_once __DIR__ . '/../../classes/Student.php';
 require_once __DIR__ . '/../../classes/Subject.php';
 
-// THEN create the objects
 $studentObj = new Student();
 $subjectObj = new Subject();
 
-// THEN get data
 $student_id = $_SESSION['student_id'] ?? 0;
 $all_subjects = $subjectObj->getAll();
 
@@ -20,7 +18,6 @@ if ($student_id) {
 ?>
 
 <div class="it-classes-container">
-    <!-- Header -->
     <div class="page-header">
         <div class="header-left">
             <h1>IT Classes</h1>
@@ -34,14 +31,6 @@ if ($student_id) {
         </div>
     </div>
 
-    <!-- Filter Tabs -->
-    <div class="filter-tabs">
-        <button class="tab-btn active">All</button>
-        <button class="tab-btn">Beginner</button>
-        <button class="tab-btn">Intermediate</button>
-        <button class="tab-btn">Advanced</button>
-    </div>
-
     <!-- Classes Grid -->
     <div class="classes-grid">
         <?php if(!empty($all_subjects)): ?>
@@ -49,7 +38,8 @@ if ($student_id) {
                 <div class="class-card">
                     <div class="class-image">
                         <?php if($subject['image_path'] && $subject['image_path'] != 'default_subject.png'): ?>
-                            <img src="../../assets/images/subjects/<?= htmlspecialchars($subject['image_path']) ?>" alt="<?= htmlspecialchars($subject['title']) ?>">
+                            <img src="../../assets/images/subjects<?= htmlspecialchars($subject['image_path']) ?>" 
+                                    alt="<?= htmlspecialchars($subject['title']) ?>">
                         <?php else: ?>
                             <div class="placeholder-image">
                                 <i class="fas fa-laptop-code"></i>
@@ -60,12 +50,14 @@ if ($student_id) {
                     <div class="class-content">
                         <h3><?= htmlspecialchars($subject['title']) ?></h3>
                         <p class="class-description"><?= htmlspecialchars($subject['description'] ?? 'No description available') ?></p>
-                        
-                        <div class="class-meta">
-                            <span class="class-level">Beginner</span>
-                            <span class="class-duration">12 weeks</span>
-                        </div>
-                        
+                            <div class="class-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">12 weeks</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value"><i class="fas fa-user-graduate"></i> 24</span>
+                                </div>
+                            </div>
                         <div class="class-footer">
                             <span class="class-price">$<?= number_format($subject['fee'], 2) ?></span>
                             

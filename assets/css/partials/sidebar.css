@@ -82,7 +82,7 @@ nav {
 
 /* Figma Active State Highlight */
 .sidebar ul li.active {
-  background-color: #4f46e5; /* The specific Figma Purple */
+  background-color: #4f46e5
 }
 
 .sidebar ul li.active a {
@@ -144,3 +144,109 @@ nav {
 .logout-btn:hover {
   opacity: 1;
 }
+
+
+/* Student Sidebar - Different Style */
+.sidebar.student-sidebar {
+  background-color: #f5f5f5f5;
+}
+
+.sidebar.student-sidebar .logo h3 {
+    color: #000000;
+}
+
+.sidebar.student-sidebar .logo p {
+    color: #000000;
+}
+
+.sidebar.student-sidebar nav ul li a {
+    color: #000000;
+}
+
+.sidebar.student-sidebar nav ul li:hover {
+    background-color: black;
+    color: white;
+}
+
+.sidebar.student-sidebar nav ul li.active {
+    background: #6366f1;
+}
+
+.sidebar.student-sidebar nav ul li.active a {
+    color: rgb(255, 255, 255);
+}
+
+.sidebar.student-sidebar .user-profile {
+    border-top: 1px solid #334155;
+}
+
+.sidebar.student-sidebar .user-info .user-name {
+    color: #000000;
+}
+
+.sidebar.student-sidebar .user-info .user-role {
+    color: #000000;
+}
+.sidebar.student-sidebar nav ul li.active {
+    background: #000000;
+}
+
+
+.sidebar.student-sidebar {
+    box-shadow: 4px 0 10px rgba(30, 29, 40, 0.15);
+}
+
+
+.sidebar.student-sidebar nav ul li.active {
+    border-right: 4px solid #ff0707;
+}
+
+/* Make student name more prominent */
+.sidebar.student-sidebar .user-info .user-name {
+    color:black;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.sidebar-student-htx h3{
+  font-size: 1.3rem;
+}
+
+.sidebar-student-htx p{
+  font-size: 0.8rem;
+}
+
+
+.sidebar.student-sidebar .close-sidebar {
+    color: #000000;
+    font-size: 34px;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.sidebar.student-sidebar .close-sidebar:hover {
+    color: #ff0707; 
+}
+
+
+.sidebar.student-sidebar .user-profile {
+    margin-top: 260px;
+    padding: 20px;
+    border-top: 1px solid #dddddd;
+    background-color: black;
+}
+
+
+.sidebar.student-sidebar .fa-sign-out-alt {
+  color: white;
+}
+.sidebar.student-sidebar .user-info .user-role {
+  color: white;
+}
+
+.sidebar.student-sidebar .user-info .user-name {
+  color: white;
+}
+

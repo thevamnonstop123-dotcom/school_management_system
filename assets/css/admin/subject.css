@@ -2,25 +2,21 @@
 .subject-icon {
     width: 40px;
     height: 40px;
-    background-color: #f7df1e; /* JavaScript Yellow */
+    background-color: #f7df1e; 
     border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 900;
-    font-size: 14px;
     color: #000;
     text-transform: uppercase;
 }
 
 /* Fee Styling */
 .fee-text {
-    color: #10b981; /* Figma Green */
+    color: #10b981; 
     font-weight: 700;
     font-size: 14px;
 }
-
-/* --- Layout Adjustments --- */
 
 .rooms-grid.admin-layout {
     grid-template-columns: 1fr 380px; 
@@ -51,4 +47,24 @@ textarea:focus {
 .rooms-list-section {
     position: relative;
     z-index: 10;
+}
+
+.btn-save {
+    background-color:#4F46E5 !important;
+    color: white !important;
+}
+
+.btn-save:hover {
+    background-color: #271bfe !important;
+}
+
+.form-actions2 {
+    display: flex;
+}
+
+
+@media (max-width: 1200px) {
+    .rooms-grid.admin-layout {
+        grid-template-columns: 1fr; 
+    }
 }

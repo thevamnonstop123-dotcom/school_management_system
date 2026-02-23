@@ -56,13 +56,14 @@ if ($action == 'list') {
                 <div class="course-card">
                     <div class="course-image">
                         <?php if (!empty($course['image_path']) && $course['image_path'] != 'default_subject.png'): ?>
-                            <img src="../../assets/images/subjects/<?= $course['image_path'] ?>" 
-                                 alt="<?= htmlspecialchars($course['title']) ?>">
+                            <img src="../assets/images/subjects<?= htmlspecialchars($course['image_path']) ?>" 
+                                alt="<?= htmlspecialchars($course['title']) ?>">
                         <?php else: ?>
                             <div class="placeholder-image">
                                 <i class="fas fa-book"></i>
                             </div>
                         <?php endif; ?>
+                        
                         <?php if (!empty($dayOfWeek)): ?>
                             <span class="course-day-badge"><?= substr($dayOfWeek, 0, 3) ?></span>
                         <?php endif; ?>

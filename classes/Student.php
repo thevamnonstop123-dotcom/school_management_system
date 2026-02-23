@@ -312,4 +312,45 @@ public function updateStatus($student_id, $status) {
         ':status' => $status
     ]);
 }
+
+/**
+ * Get monthly enrollment trends for dashboard
+ */
+public function getMonthlyEnrollments($months = 6) {
+    $sql = "SELECT 
+                DATE_FORMAT(enrollment_date, '%b') as month,
+                COUNT(*) as count
+            FROM enrollments
+            WHERE enrollment_date >= DATE_SUB(NOW(), INTERVAL :months MONTH)
+            GROUP BY MONTH(enrollment_date)
+            ORDER BY enrollment_date ASC";
+    
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':months', (int)$months, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Get recent enrollments for dashboard
+ */
+public function getRecentEnrollments($limit = 5) {
+    $sql = "SELECT 
+                e.*,
+                stu.first_name,
+                stu.last_name,
+                sub.title as subject_title,
+                p.status as payment_status
+            FROM enrollments e
+            JOIN students stu ON e.student_id = stu.student_id
+            JOIN subjects sub ON e.subject_id = sub.subject_id
+            LEFT JOIN payments p ON e.student_id = p.student_id AND e.subject_id = p.subject_id
+            ORDER BY e.enrollment_date DESC
+            LIMIT :limit";
+    
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

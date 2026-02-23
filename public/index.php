@@ -10,7 +10,7 @@ $admin_roles = ['Administrator', 'Super Admin', 'Manager'];
 $isAdmin = (isset($_SESSION["user_role"]) && in_array($_SESSION["user_role"], $admin_roles));
 $isStudent = (isset($_SESSION["user_role"]) && $_SESSION["user_role"] === "student");
 
-$view = $_GET['view'] ?? 'trainer';
+$view = $_GET['view'] ?? 'dashboard';
 $valid_views = ['branches', 'create_branch', 'edit_branch', 'subjects', 'edit_subject', 
                 'schedule', 'create_schedule', 'edit_schedule', 'trainers', 'rooms', 
                 'edit_room', 'payment_confirm', 'students', 'courses', 
@@ -41,6 +41,7 @@ include 'partials/sidebar.php';
 
     $view_map = [
         // Admin views
+        'dashboard' => 'dashboard.php',
         'branches' => 'branch/branch_list.php',
         'create_branch' => 'branch/create_branch.php',
         'edit_branch' => 'branch/edit_branch.php',
@@ -67,6 +68,8 @@ include 'partials/sidebar.php';
 
     switch($view) {
         // Admin data preparation
+        case 'dashboard':
+            break;
         case 'subjects':
         case 'edit_subject':
             if ($view == 'edit_subject' && isset($_GET['id'])) {
@@ -111,7 +114,7 @@ include 'partials/sidebar.php';
         if ($isStudent) {
             header("Location: index.php?view=my_class");
         } else {
-            header("Location: index.php?view=trainers");
+            header("Location: index.php?view=dashboard");
         }
         exit();
     }

@@ -19,7 +19,6 @@ $total = array_sum(array_column($cart_items, 'fee'));
     </div>
 
     <div class="checkout-grid">
-        <!-- Left Column - Billing Information -->
         <div class="billing-section">
             <div class="section-card">
                 <h2>Billing Information</h2>
@@ -90,7 +89,6 @@ $total = array_sum(array_column($cart_items, 'fee'));
 
         <!-- Right Column - Order Summary & What's Included -->
         <div class="order-section">
-            <!-- Order Summary -->
             <div class="section-card order-card">
                 <h2>Order Summary</h2>
                 

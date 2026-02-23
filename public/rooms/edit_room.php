@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
             <div class="form-group">
                 <label>Branch</label>
                 <select name="branch_id" required>
-                    <option value="">Select Branch</option>
+                    <option class="brach-select" value="">Select Branch</option>
                     <?php 
                     $branchObj = new Branch();
                     $branches = $branchObj->getAll();

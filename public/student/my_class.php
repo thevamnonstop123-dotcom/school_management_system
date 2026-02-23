@@ -19,7 +19,7 @@ foreach($enrolled_classes as $class) {
     }
 }
 
-$invited_classes = []; // Will come from invitations table later
+$invited_classes = [];
 ?>
 
 <div class="my-class-container">

@@ -32,7 +32,15 @@ $btnName = $isEdit ? "update_subject" : "create_subject";
                 <?php foreach ($all_subjects as $s): ?>
                 <tr>
                     <td class="id-cell"><?= str_pad($s['subject_id'], 3, '0', STR_PAD_LEFT) ?></td>
-                    <td><div class="subject-icon">JS</div></td>
+                    <td>
+                        <div class="subject-icon">
+                            <?php if(!empty($s['image_path'])): ?>
+                                <img src="../assets/images/subjects<?= $s['image_path'] ?>" style="width:100%; height:100%; border-radius:8px; object-fit:cover;">
+                            <?php else: ?>
+                                <?= substr($s['title'], 0, 2) ?>
+                            <?php endif; ?>
+                        </div>
+                    </td>
                     <td>
                         <strong><?= htmlspecialchars($s['title']) ?></strong>
                         <p style="font-size: 12px; color: #64748b; margin: 0;"><?= htmlspecialchars($s['description']) ?></p>
@@ -80,7 +88,7 @@ $btnName = $isEdit ? "update_subject" : "create_subject";
                 <label>Description</label>
                 <textarea name="description" rows="4"><?= $isEdit ? htmlspecialchars($subject_data['description']) : '' ?></textarea>
             </div>
-            <div class="form-actions">
+            <div class="form-actions2">
                 <button type="submit" name="<?= $btnName ?>" class="btn-save"><?= $isEdit ? 'Update' : 'Create' ?> Subject</button>
                 <?php if($isEdit): ?>
                     <a href="index.php?view=subjects" class="btn-cancel" style="display: block; text-align: center; text-decoration: none; padding: 10px;">Cancel</a>

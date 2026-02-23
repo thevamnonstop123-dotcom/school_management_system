@@ -3,7 +3,6 @@
 $current_view = $_GET['view'] ?? 'dashboard';
 $user_role = $_SESSION['user_role'] ?? ''; 
 
-
 $admin_roles = ['Administrator', 'Super Admin', 'Manager'];
 $isAdminUser = in_array($user_role, $admin_roles);
 
@@ -11,20 +10,20 @@ function is_active($menu_item, $current_view) {
     $menu_groups = [
         'dashboard' => ['dashboard'],
         'trainers'  => ['trainers', 'create_trainer', 'edit_trainer'],
-        'students' => ['students/students.php'],
-        'courses' =>  ['courses/courses.php'],    
-        'students'  => ['students', 'create_student', 'edit_student'],
+
+        'students'  => ['students', 'create_student', 'edit_student'], 
+        'courses'   => ['courses', 'create_course', 'edit_course'],    
         'rooms'     => ['rooms', 'edit_room'],
-        'schedule' => ['schedule', 'create_schedule', 'edit_schedule'],
+        'schedule'  => ['schedule', 'create_schedule', 'edit_schedule'],
         'subjects'  => ['subjects', 'edit_subject'],
         'branches'  => ['branches', 'create_branch', 'edit_branch'],
-        'reports' => ['payment_confirm'],
+        'reports'   => ['payment_confirm'],
         
         // Student menu groups
-        'it_classes' => ['it_classes'],
-        'my_class' => ['my_class'],
+        'it_classes'       => ['it_classes'],
+        'my_class'         => ['my_class'],
         'student_schedule' => ['student_schedule'],
-        'profile' => ['profile']
+        'profile'          => ['profile']
     ];
 
     if (isset($menu_groups[$menu_item]) && in_array($current_view, $menu_groups[$menu_item])) {
@@ -35,13 +34,12 @@ function is_active($menu_item, $current_view) {
 }
 ?>
 
-<aside class="sidebar">
+<aside class="sidebar <?= ($user_role == 'student') ? 'student-sidebar' : '' ?>">
     <a href="javascript:void(0)" class="close-sidebar" id="closeSidebar">&times;</a>
     <div class="logo">
-        <i class="fas fa-graduation-cap"></i>
-        <div>
+        <div class="sidebar-student-htx">
             <h3>Training School</h3>
-            <p>Management System</p>
+            <p><?= ($user_role == 'student') ? 'IT Learning Platform' : 'Management System' ?></p>
         </div>
     </div>
     
@@ -136,7 +134,7 @@ function is_active($menu_item, $current_view) {
                     </a>
                 </li>
             <?php else: ?>
-            <!-- STAFF MENU - For staff users (view only) -->
+            <!-- STAFF MENU -->
             <li class="<?= is_active('dashboard', $current_view); ?>">
                     <a href="index.php?view=dashboard">
                         <i class="fas fa-th-large"></i> <span>Dashboard</span>
@@ -202,15 +200,25 @@ function is_active($menu_item, $current_view) {
         </ul>
     </nav>
 
+    
+
     <div class="user-profile">
         <div class="user-details">
             <img src="../../assets/images/mylogo.png" alt="User">
             <div class="user-info">
+                <span class="user-role">
+                    <?php 
+                    $role = $_SESSION['user_role'] ?? '';
+                    if ($role == 'Administrator') echo 'Administrator';
+                    elseif ($role == 'Super Admin') echo 'Super Admin';
+                    elseif ($role == 'Manager') echo 'Manager';
+                    elseif ($role == 'Staff') echo 'Staff';
+                    elseif ($role == 'student') echo 'Student';
+                    else echo 'Guest';
+                    ?>
+                </span>
                 <span class="user-name">
                     <?= $_SESSION['student_name'] ?? $_SESSION['user_name'] ?? 'Admin User' ?>
-                </span>
-                <span class="user-role">
-                    <?= $_SESSION['user_role'] ?? 'Administrator' ?>
                 </span>
             </div>
         </div>

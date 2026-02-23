@@ -91,28 +91,68 @@ class Payment extends Model {
     }
 
     /**
+     * Get pending payments count for dashboard
+     */
+    public function getPendingCount() {
+        $sql = "SELECT COUNT(*) as count FROM {$this->table} WHERE status = 'pending'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'] ?? 0;
+    }
+
+    /**
+     * Get revenue by subject for dashboard pie chart
+     */
+    public function getRevenueBySubject() {
+        $sql = "SELECT 
+                    s.title as subject,
+                    SUM(p.total_amount) as revenue,
+                    ROUND((SUM(p.total_amount) / (SELECT SUM(total_amount) FROM {$this->table} WHERE status = 'confirmed')) * 100, 1) as percentage
+                FROM {$this->table} p
+                JOIN subjects s ON p.subject_id = s.subject_id
+                WHERE p.status = 'confirmed'
+                GROUP BY p.subject_id
+                ORDER BY revenue DESC
+                LIMIT 4";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Add colors for pie chart
+        $colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444'];
+        foreach ($results as $key => $row) {
+            $results[$key]['color'] = $colors[$key] ?? '#94a3b8';
+        }
+        
+        return $results;
+    }
+
+    /**
      * Get payment statistics for dashboard
      */
     public function getStats() {
         $stats = [];
         
         // Total revenue
-        $sql = "SELECT SUM(amount) as total FROM {$this->table} WHERE status = 'confirmed'";
-        $stmt = $this->conn->query($sql);
+        $sql = "SELECT SUM(total_amount) as total FROM {$this->table} WHERE status = 'confirmed'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
         $stats['total_revenue'] = $stmt->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
         
         // Pending payments count
-        $sql = "SELECT COUNT(*) as count FROM {$this->table} WHERE status = 'pending'";
-        $stmt = $this->conn->query($sql);
-        $stats['pending_count'] = $stmt->fetch(PDO::FETCH_ASSOC)['count'] ?? 0;
+        $stats['pending_count'] = $this->getPendingCount();
         
         // This month's revenue
-        $sql = "SELECT SUM(amount) as total FROM {$this->table} 
+        $sql = "SELECT SUM(total_amount) as total FROM {$this->table} 
                 WHERE status = 'confirmed' 
                 AND MONTH(payment_date) = MONTH(CURRENT_DATE())";
-        $stmt = $this->conn->query($sql);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
         $stats['monthly_revenue'] = $stmt->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
         
         return $stats;
     }
 }
+

@@ -16,9 +16,23 @@ if (isset($_GET['delete_id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imageName = $_POST['old_image'] ?? "default_subject.png";
     
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // TEMP DEBUG: Remove after testing
+    // print_r($_FILES['subject_image']); 
+    
+    $imageName = $_POST['old_image'] ?? "default_subject.png";
+    
     if (!empty($_FILES['subject_image']['name'])) {
-        $imageName = time() . "_" . $_FILES['subject_image']['name'];
-        move_uploaded_file($_FILES['subject_image']['tmp_name'], "../../assets/uploads/" . $imageName);
+            $imageName = time() . "_" . $_FILES['subject_image']['name'];
+            $uploadPath = "../../assets/images/subjects" . $imageName;
+            
+            if(move_uploaded_file($_FILES['subject_image']['tmp_name'], $uploadPath)) {
+                // Success!
+            } else {
+                // Failure - likely folder path or permission issue
+                die("Upload failed. Check if $uploadPath exists and is writable.");
+            }
+        }
     }
 
     $data = [

@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px; /* Reduced to make room for breadcrumb */
+    margin-bottom: 15px; 
 }
 
 .header-left h1 { font-size: 24px; color: #1e293b; margin: 0; }

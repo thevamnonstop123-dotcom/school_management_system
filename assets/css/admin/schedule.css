@@ -30,6 +30,7 @@
   align-items: center;
   margin-bottom: 24px;
 }
+
 .btn-create-schedule {
   background: #4f46e5;
   color: white;
@@ -367,11 +368,11 @@ td {
 }
 
 .btn-edit {
-    color: #6366f1; /* Figma Purple */
+    color: #6366f1; 
 }
 
 .btn-delete {
-    color: #ef4444; /* Standard Red */
+    color: #ef4444; 
 }
 
 .btn-edit:hover, .btn-delete:hover {

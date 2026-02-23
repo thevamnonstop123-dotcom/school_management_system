@@ -112,4 +112,39 @@ class Schedule extends Model {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total'];
     }
+
+public function getActiveClassesCount() {
+    $sql = "SELECT COUNT(*) as count FROM schedules WHERE status = 'Active'";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['count'] ?? 0;
+}
+
+/**
+ * Get upcoming classes for dashboard
+ */
+public function getUpcomingClasses($limit = 5) {
+    $sql = "SELECT 
+                sched.*,
+                sub.title,
+                t.full_name as teacher_name,
+                COUNT(e.enrollment_id) as enrolled_students,
+                60 as completed,
+                100 as total,
+                60 as percentage
+            FROM schedules sched
+            JOIN subjects sub ON sched.subject_id = sub.subject_id
+            JOIN trainers t ON sched.trainer_id = t.trainer_id
+            LEFT JOIN enrollments e ON sched.subject_id = e.subject_id
+            WHERE sched.status = 'Active'
+            GROUP BY sched.schedule_id
+            ORDER BY sched.start_time ASC
+            LIMIT :limit";
+    
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

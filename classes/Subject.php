@@ -4,7 +4,6 @@ require_once __DIR__ . '/core/Model.php';
 class Subject extends Model {
     protected $table = "subjects";
 
-    // Basic CRUD
     public function getAll() {
         $query = "SELECT * FROM {$this->table} ORDER BY created_at ASC";
         $stmt = $this->conn->prepare($query);
