@@ -62,6 +62,10 @@ textarea:focus {
     display: flex;
 }
 
+.rooms-grid.is-staff  {
+    grid-template-columns: 1fr;
+}
+
 
 @media (max-width: 1200px) {
     .rooms-grid.admin-layout {

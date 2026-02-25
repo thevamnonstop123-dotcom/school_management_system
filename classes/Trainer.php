@@ -60,16 +60,17 @@
         ]);
         }
 
-        public function search($term) {
-            $sql = "SELECT * FROM {$this->table}
+        public function countSearchResults($term) {
+            $sql = "SELECT COUNT(*) as total FROM {$this->table}
                     WHERE full_name LIKE :term
                     OR email LIKE :term
-                    OR specialization LIKE :term
-                    ORDER BY trainer_id DESC";
+                    OR specialization LIKE :term";
+            
             $stmt = $this->conn->prepare($sql);
             $searchTerm = "%$term%";
             $stmt->execute([':term' => $searchTerm]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
         }
 
         public function getTrainersWithPagination($offset, $limit) {

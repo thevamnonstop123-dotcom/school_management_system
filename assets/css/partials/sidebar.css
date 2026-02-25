@@ -208,12 +208,27 @@ nav {
     font-size: 15px;
 }
 
+.sidebar-student-htx {
+  display: flex;
+  flex-direction: column;
+}
+
 .sidebar-student-htx h3{
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .sidebar-student-htx p{
   font-size: 0.8rem;
+}
+
+.fa-graduation-cap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  background-color:#3336FF;
 }
 
 
@@ -232,7 +247,7 @@ nav {
 
 
 .sidebar.student-sidebar .user-profile {
-    margin-top: 260px;
+    margin-top: 200px;
     padding: 20px;
     border-top: 1px solid #dddddd;
     background-color: black;

@@ -9,7 +9,7 @@ if ($action === 'list') {
 
     if (!empty($search)) {
         $allTrainers = $trainerObj->searchWithPagination($search, $offset, $limit);
-        $totalTrainers = count($trainerObj->search($search));
+        $totalTrainers = $trainerObj->countSearchResults($search);
     } else {
         $allTrainers = $trainerObj->getTrainersWithPagination($offset, $limit);
         $totalTrainers = $trainerObj->getTotalCount();
@@ -157,12 +157,17 @@ if ($action === 'list') {
                                     <td><?php echo str_pad($row['trainer_id'], 3, '0', STR_PAD_LEFT); ?></td>
                                     <td class="user-cell">
                                         <?php
-                                        $imageFolder = (strpos($row['avatar_url'], 'default') !== false) ? 'images/' : 'images/trainers/';
+                                        $avatar_url = $row['avatar_url'];
+                                        if (strpos($avatar_url, 'default') === false) {
+                                            $imagePath = "../../assets/images/trainers/" . $avatar_url;
+                                        } else {
+                                            $imagePath = "../../assets/images/" . $avatar_url;
+                                        }
                                         ?>
-                                        <img src="../../assets/<?php echo $imageFolder . $row['avatar_url']; ?>" alt="Avatar" class="avatar-img">
+                                        <img src="<?= $imagePath ?>" alt="Avatar" class="avatar-img" loading="lazy">
                                         <div class="name-email">
-                                            <strong><?php echo htmlspecialchars($row['full_name']); ?></strong>
-                                            <small><?php echo htmlspecialchars($row['email']); ?></small>
+                                            <strong><?= htmlspecialchars($row['full_name']); ?></strong>
+                                            <small><?= htmlspecialchars($row['email']); ?></small>
                                         </div>
                                     </td>
                                     <td>
@@ -176,19 +181,22 @@ if ($action === 'list') {
                                         </span>
                                     </td>
                                     <td class="actions">
-
-                                       <?php if($isAdmin) : ?>
-                                            <i class="far fa-eye" title="View"></i>
-                                            <a href="trainer/edit_trainer.php?id=<?= $row['trainer_id']; ?>" title="Edit">
+                                        <?php if($isAdmin) : ?>
+                                            <a href="#" class="btn-view" title="View">
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                            
+                                            <a href="trainer/edit_trainer.php?id=<?= $row['trainer_id']; ?>" class="btn-edit" title="Edit">
                                                 <i class="far fa-edit"></i>
                                             </a>
 
                                             <a href="trainer/delete_trainer.php?id=<?= $row['trainer_id']; ?>"
-                                                onclick="return confirm('Are you sure you want to delete this trainer?');" title="Delete">
+                                            class="btn-delete" 
+                                            onclick="return confirm('Are you sure you want to delete this trainer?');" 
+                                            title="Delete">
                                                 <i class="far fa-trash-alt"></i>
                                             </a>
                                         <?php endif; ?>
-                                        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

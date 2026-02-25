@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../../assets/css/partials/sidebar.css">
     <link rel="stylesheet" href="../../assets/css/partials/header.css">
     <link rel="stylesheet" href="../../assets/css/auth/admin_register.css">
-     <link rel="stylesheet" href="../../assets/css/admin/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/admin/dashboard.css">
 
     <title>Training School Management</title>
 </head>

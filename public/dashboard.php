@@ -1,5 +1,4 @@
 <?php
-// Ensure paths match your structure
 require_once __DIR__ . "../../classes/Student.php";
 require_once __DIR__ . "../../classes/Payment.php";
 require_once __DIR__ . "../../classes/Schedule.php";
@@ -8,7 +7,6 @@ $studentModel = new Student();
 $paymentModel = new Payment();
 $scheduleModel = new Schedule();
 
-// Data Fetching
 $totalStudents = $studentModel->getTotalStudents();
 $activeClasses = $scheduleModel->getActiveClassesCount();
 $payStats      = $paymentModel->getStats();
