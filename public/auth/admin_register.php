@@ -1,4 +1,7 @@
-<?php include '../partials/header.php'; ?>
+<?php 
+session_start();
+include '../partials/header.php';
+?>
 
 <div class="auth-wrapper">
     <div class="register-container admin-register-container">
@@ -44,7 +47,16 @@
             </div>
 
             <form action="process_admin_register.php" method="POST" class="admin-form">
-                <!-- Name Row - First & Last -->
+
+                <?php if(isset($_SESSION['error'])): ?>
+                    <div class="error-messages" style="color: #e74c3c; background: #fdeaea; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                        <?php foreach($_SESSION['error'] as $error) : ?>
+                            <p style="margin: 0; font-size: 14px;"><i class="fas fa-exclamation-circle"></i> <?php echo $error; ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php unset($_SESSION['error']); ?> 
+                <?php endif; ?>
+
                 <div class="form-row">
                     <div class="form-group">
                         <label>First Name</label>
@@ -111,7 +123,6 @@
                     <i class="fas fa-user-plus"></i> Create Admin Account
                 </button>
 
-                <!-- Login Link -->
                 <p class="auth-footer">
                     Already have an account? 
                     <a href="login.php">Sign in here</a>

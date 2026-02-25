@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_admin'])) {
     
     // If errors, redirect back with error messages
     if (!empty($errors)) {
-        $_SESSION['register_errors'] = $errors;
+        $_SESSION['error'] = $errors;
         $_SESSION['form_data'] = $_POST;
         header("Location: admin_register.php");
         exit();
